@@ -64,10 +64,12 @@ function userExists(username) {
     let allUsersData = getUserData();
     let foundUser = false;
     let i = 0;
-    while (foundUser == false && i < allUsersData.length) {
-        if (allUsersData[i].username == username)
-            foundUser = true;
-        i ++;
+    if (allUsersData != null) {
+        while (foundUser == false && i < allUsersData.length) {
+            if (allUsersData[i].username == username)
+                foundUser = true;
+            i ++;
+        }
     }
     return foundUser;
 }
@@ -76,12 +78,14 @@ function emailExists(email) {
     let allUsersData = getUserData();
     let foundEmail = false;
     let i = 0;
-    while (foundEmail == false && i < allUsersData.length) {
-        if (allUsersData[i].email == email)
-            foundEmail = true;
-        if (foundEmail)
-            console.log(`Found email ${allUsersData[i].email} in ${allUsersData[i]}`);
-        i ++;
+    if (allUsersData != null) {
+        while (foundEmail == false && i < allUsersData.length) {
+            if (allUsersData[i].email == email)
+                foundEmail = true;
+            if (foundEmail)
+                console.log(`Found email ${allUsersData[i].email} in ${allUsersData[i]}`);
+            i ++;
+        }
     }
     return foundEmail;
 }
