@@ -1,0 +1,170 @@
+:root {
+    --primary-background: #f1fdff;
+    --primary-text: #000;
+    --accent-colour1: #FFF;
+    --secondary-colour1:#64a8b1;
+    --accent-hover:#eee;
+    --title-font:arial;
+    --main-font:trebuchet ms;
+
+    --accent-colour3: #2572ff;
+    --accent-colour4: #000050;
+}
+
+body {
+    background-color:var(--secondary-colour1);
+    font-family:var(--main-font);
+}
+
+header {
+    background-color: var(--accent-colour1);
+}
+
+main {
+    background-color: var(--primary-background);
+    padding: 4em 8em;
+}
+
+h1#page-title  {
+    font-family: var(--title-font);
+    font-size: 6em;
+    line-height: 0px;
+    cursor:default;
+}
+
+nav#main-nav {
+    background-color: var(--accent-colour1);
+    display:flex;
+    justify-content: space-around;
+}
+
+nav#main-nav button {
+    width:100%;
+    height:3em;
+}
+
+button:hover {
+    cursor:pointer;
+}
+
+button:hover:disabled {
+    cursor:not-allowed;
+}
+
+.fa-solid {
+    /* generic styling for icons */
+}
+
+/* fix for different display sizes and add label for balance */
+
+#icons {
+    position:absolute;
+    float:right;
+    top:1em;
+    right:1em;
+    width:28%;
+    height:4em;
+}
+
+#coin-img {
+    float:left;
+    color:gold;
+    font-size:1.4em;
+    margin-right:1em;
+}
+
+#balance-num {
+    float:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size:1.4em;
+    cursor:default;
+}
+
+#user-pfp-button {
+    float:right;
+    background-color: transparent;
+    border:none;
+    height:100%;
+    font-size:3em;
+    transition: font-size .1s ease, right .1s ease, top .1s ease;
+}
+
+#user-pfp-button:hover {
+    right:.6em;
+    /* top:.5em; */
+    font-size:4em;
+    cursor:pointer;
+}
+
+#user-pfp-icon {
+    height:100%;
+}
+
+#user-menu {
+    position:fixed;
+    float:right;
+    width:8em;
+    right:-9em;
+    background-color: white;
+    margin:0px;
+    padding:5px;
+    overflow: hidden;
+    transition: right .2s ease;
+}
+
+#user-menu.displayed {
+    right:.0;
+}
+
+#user-menu li {
+    list-style: none;
+}
+
+#user-menu button {
+    display:block;
+    width:100%;
+    height:4em;
+}
+
+input[type="submit"] {
+    cursor:pointer;
+}
+
+/* Moderately narrow screen */
+@media (max-width:900px) {
+    main {
+        padding: 2em 3em;
+    }
+    h1#page-title {
+        font-size:4em;
+    }
+    #icons {
+        width:40%;
+    }
+    #user-pfp {
+        height:4em;
+    }
+}
+
+/* Severely narrow screen */
+@media (max-width:600px) {
+    main {
+        padding: 1em 2em;
+    }
+
+    h1#page-title {
+        color:white;
+    }
+    #coin-img {
+        display:none;
+    }
+
+    .nav-button-text {
+        display:none;
+    }
+
+    nav#main-nav button {
+        font-size:1.2em;
+    }
+}

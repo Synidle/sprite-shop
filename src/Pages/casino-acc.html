@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Casino</title>
+        <link href="../CSS/styles.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <a href="casino.html">Visual P5.js version</a>
+        <section id="card-game-frame">
+            <div id="game">
+                <p id="opponent-hand" hidden></p>
+                <p id="played-cards"></p>
+                <p id="placed-card"></p>
+                <div id="free-cards" hidden>
+                    <button id="free-0"></button>
+                    <button id="free-1"></button>
+                    <button id="free-2"></button>
+                    <button id="free-3"></button>
+                    <button id="free-4"></button>
+                    <button id="free-5"></button>
+                    <button id="free-6"></button>
+                </div>
+                <div id="hand">
+                    <button id="hand-0"></button>
+                    <button id="hand-1"></button>
+                    <button id="hand-2"></button>
+                    <button id="hand-3"></button>
+                    <button id="hand-4"></button>
+                    <button id="hand-5"></button>
+                    <button id="hand-6"></button>
+                </div>
+                <button id="finished-button">Finished</button>
+            </div>
+            <div id="between-game" hidden>
+                <p id="result">You win!</p>
+                <button id="play-button">Play again</button>
+            </div>
+        </section>
+        <script src="../JS/card-game.js"></script>
+        <script src="../JS/game-html.js"></script>
+    </body>
+</html>

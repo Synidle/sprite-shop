@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Sign up</title>
+        <link href="../CSS/styles.css" type="text/css" rel="stylesheet">
+        <link href="../CSS/signup-form.css" type="text/css" rel="stylesheet">
+    </head>
+
+    <body>
+        <form id="form">
+            <fieldset>
+                <legend>Sign Up</legend>
+                <label for="username">Username</label>
+                <!--Use script to generate random usernames for placeholder-->
+                <input id="username" name="username" type="text" placeholder="Enter Username" required>
+                <p id="username-warning" class="warning" hidden></p>
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="youremail@place.com" required>
+                <p id="email-warning" class="warning" hidden></p>
+                <label for="confirm-email">Confirm Email</label>
+                <input id="confirm-email" name="email" type="email" placeholder="Re-enter email address" required>
+                <p id="confirm-email-warning" class="warning" hidden></p>
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" placeholder="Enter a strong password" minlength="8" required>
+                <p id="password-warning" class="warning" hidden></p>
+                <label for="confirm-password">Confirm Password</label>
+                <input id="confirm-password" name="password" type="password" placeholder="Re-enter password" required>
+                <p id="confirm-password-warning" class="warning" hidden></p>
+                <div id="consent">
+                    <input id="terms-conditions" name="terms-conditions" type="checkbox" value="agree" required>
+                    <label for="terms-conditions">I have read and agree to the <a href="../Pages/terms-and-conditions.html" target="_blank">terms and conditions</a></label>
+                    <p id="terms-warning" class="warning" hidden>Please agree to the terms and conditions to continue.</p>
+                    <input id="sharing-data" name="sharing-data" type="checkbox" value="agree" required>
+                    <label for="sharing-data">I consent to sharing my data with SpriteCo and partners</label>
+                    <p id="data-warning" class="warning" hidden>Please agree to data sharing to continue.</p>
+                    <input id="mailing-list" name="mailing-list" type="checkbox" value="agree">
+                    <label for="mailing-list">I would like to receive updates and promotions from SpriteCo via email</label>
+                </div>
+                <p id="main-warning" class="warning" hidden>Incomplete information. Please address the highlighted errors.</p>
+                <input id="sign-up" name="sign-up" type="submit" value="Sign Up">
+                <p>Already have an account? <a href="../Pages/sign-in.html">Sign In</a></p>
+            </fieldset>
+        </form>
+
+        <script src="../JS/data.js"></script>
+        <script src="../JS/signup.js"></script>
+    </body>
+</html>

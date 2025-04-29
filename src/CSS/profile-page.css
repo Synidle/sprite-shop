@@ -1,0 +1,27 @@
+main {
+    background-color: white;
+    text-align: center;
+}
+
+#pre-button-space {
+    display:block;
+    padding-bottom: 10%;
+}
+
+button#change-email {
+    position:absolute;
+}
+
+button#return {
+    font-size:1.1em;
+    border:none;
+    width:16em;
+    height:2em;
+    border-radius:16px;
+    background-color: var(--accent-colour3);
+    color:white;
+    transition:background-color .3s ease;
+}
+button#return:hover {
+    background-color: var(--accent-colour4);
+}

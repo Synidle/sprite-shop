@@ -1,0 +1,119 @@
+body {
+    background-color: white;
+}
+
+main {
+    background-color: white;
+}
+
+form {
+    width:50%;
+    text-align:center;
+    position:absolute;
+    left:25%;
+    margin-top: 2em;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+form legend {
+    font-size:1.4em;
+    font-weight:bold;
+    margin: 0 auto;
+}
+
+form label {
+    display:block;
+    padding-top: .6em;
+}
+
+input:hover:not(:focus) {
+    outline: 2px solid var(--accent-colour3);
+    border-radius: 4px;
+}
+
+input:focus {
+    outline: 2px solid var(--accent-colour4);
+}
+
+input.attention {
+    outline: 1px dashed red;
+}
+input.attention:hover {
+    outline:2px solid red;
+    border-radius:4px;
+}
+
+#consent {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    font-size: .8em;
+    
+}
+
+#consent label {
+    display:block;
+}
+
+#consent input {
+    float:left;
+    clear:right;
+    margin-right:2em;
+    margin-top:1em;
+}
+
+a:hover {
+    background-color:azure;
+}
+
+a.big-link {
+    display:block;
+    margin-top:.25em;
+    margin-bottom:.5em;
+    padding-top:.25em;
+    padding-bottom:.5em;
+}
+
+#pre-button-space {
+    display:block;
+    padding-bottom:20%;
+}
+
+input#sign-up, input#sign-in {
+    font-size:1.1em;
+    border:none;
+    width:6em;
+    height:2em;
+    border-radius:16px;
+    background-color: var(--accent-colour3);
+    color:white;
+
+    transition: background-color .3s ease;
+}
+
+
+input#sign-up:hover, input#sign-in:hover {
+    background-color: var(--accent-colour4);
+}
+
+p.warning {
+    color:red;
+    font-size:.8em;
+}
+
+@media (min-width:800px) {
+    form {
+        width:33%;
+        left:33%;
+    }
+    #consent label {
+        padding-left: 4em;
+        padding-top: 1.4em;
+    }
+    #consent input {
+        float:right;
+        margin-right:0;
+        padding-right:0;
+        margin-top:1.4em;
+        margin-left:1.2em;
+    }
+}

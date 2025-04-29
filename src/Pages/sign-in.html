@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Sign in</title>
+        <link href="../CSS/styles.css" type="text/css" rel="stylesheet">
+        <link href="../CSS/signup-form.css" type="text/css" rel="stylesheet">
+    </head>
+
+    <body>
+        <form id="form">
+            <fieldset>
+                <legend>Sign In</legend>
+                <label for="username">Username</label>
+                <input id="username" name="username" type="text" placeholder="Enter Username" required>
+                <p id="username-warning" class="warning" hidden>No account exists with this username. Would you like to <a href="../Pages/signup.html">create an account</a>?</p>
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" placeholder="Enter Password" required>
+                <p id="password-warning" class="warning" hidden>That password is incorrect.</p>
+                <a class="big-link" href="#">Forgotten password</a>
+                <span id="pre-button-space"></span>
+                <input id="sign-in" name="sign-in" type="submit" value="Sign In">
+                <p class="big-link">No account? <a href="../Pages/signup.html">Sign Up</a></p>
+            </fieldset>
+        </form>
+
+        <script src="../JS/data.js"></script>
+        <script src="../JS/login.js"></script>
+    </body>
+</html>
