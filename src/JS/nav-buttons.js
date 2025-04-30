@@ -5,6 +5,10 @@ document.getElementById("home-button").addEventListener("click", function(){
     open("homepage.html", "_self");
 });
 
+document.getElementById("shop-button").addEventListener("click", function(){
+    open("shop.html", "_self");
+});
+
 document.getElementById("casino-button").addEventListener("click", function(){
     open("casino.html", "_self");
 });

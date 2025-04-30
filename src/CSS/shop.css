@@ -1,0 +1,15 @@
+.shop-item {
+    margin:1em;
+}
+
+.shop-item img{
+    width:20vw;
+    height:20vw;
+}
+
+/* Moderately narrow screen */
+@media (max-width:900px) {
+    .shop-item {
+        margin:0px;
+    }
+}

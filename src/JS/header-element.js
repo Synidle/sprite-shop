@@ -14,7 +14,7 @@ document.querySelector("#header").innerHTML = `
     </menu>
     <nav id="main-nav">
         <button id="home-button"><i class="fa-solid fa-house-chimney"></i><span class="nav-button-text"> Home</span></button>
-        <button id="shop-button" disabled><i class="fa-solid fa-shop"></i><span class="nav-button-text"> Shop</span></button>
+        <button id="shop-button"><i class="fa-solid fa-shop"></i><span class="nav-button-text"> Shop</span></button>
         <button id="casino-button"><i class="fa-solid fa-heart"></i><span class="nav-button-text"> Casino</span></button>
         <button id="sell-button" disabled><i class="fa-solid fa-parachute-box"></i><span class="nav-button-text"> Sell</span></button>
     </nav>
