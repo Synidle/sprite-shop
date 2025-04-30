@@ -17,6 +17,8 @@ body {
 }
 
 header {
+    /* position:fixed;
+    width:100%; */
     background-color: var(--accent-colour1);
 }
 
@@ -55,7 +57,7 @@ button:hover:disabled {
     /* generic styling for icons */
 }
 
-/* fix for different display sizes and add label for balance */
+/* Maybe have header elements sticky */
 
 #icons {
     position:absolute;
@@ -65,6 +67,7 @@ button:hover:disabled {
     width:28%;
     height:4em;
 }
+
 
 #coin-img {
     float:left;
@@ -129,6 +132,23 @@ button:hover:disabled {
 
 input[type="submit"] {
     cursor:pointer;
+}
+
+/* Wide screen */
+
+@media (min-width:901px) {
+    #coin-img {
+        font-size:2em;
+    }
+    #balance-num {
+        font-size:2em;
+    }
+    #user-pfp-button {
+        font-size:4em;
+    }
+    #user-pfp-button:hover {
+        font-size:6em;
+    }
 }
 
 /* Moderately narrow screen */
