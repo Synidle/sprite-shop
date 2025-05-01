@@ -17,6 +17,7 @@
     height:75%;
     margin:0px;
     transform:translate(0px, -8%);
+    image-rendering:pixelated;
     transition: border ease .05s; 
 }
 

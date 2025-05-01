@@ -1,4 +1,3 @@
-
 const KEY_USERDATA = "spriteshop-userdata";
 const KEY_LASTUSER = "spriteshop-lastuser";
 const KEY_SPRITE = "spriteshop-sprite";
@@ -7,6 +6,7 @@ const KEY_PURCHASES = "spriteshop-purchases";
 const KEY_SIGNUPDATA = "spriteshop-signupdata";
 const KEY_WINNINGS = "spriteshop-winnings";
 const KEY_CURRENTUSER = "spriteshop-currentuser";
+const KEY_SELECTEDPRODUCT = "spriteshop-selected-product";
 
 function UserData(username, email, password, mailingList) {
     this.username = username;
@@ -109,4 +109,30 @@ function updateUserEmail(username, newEmail) {
     }
     localStorage.setItem(KEY_USERDATA, JSON.stringify(allUsersData));
     return newUser;
+}
+
+function setPurchased(productName) {
+    let purchases = localStorage.getItem(KEY_PURCHASES);
+    let purchaseMap;
+    if (purchases != null) {
+        purchaseMap = new Map(JSON.parse(purchases));
+    }
+    else {
+        purchaseMap = new Map();
+    }
+    purchaseMap.set(productName, true);
+    localStorage.setItem(KEY_PURCHASES,
+        JSON.stringify(Array.from(purchaseMap.entries()))
+    );
+}
+
+function getPurchased(productName) {
+    let purchases = localStorage.getItem(KEY_PURCHASES);
+    let purchaseMap;
+    if (purchases == null)
+        return false;
+    purchaseMap = new Map(JSON.parse(purchases));
+    if (purchaseMap.get(productName) != undefined)
+        return true;
+    else {return false;}
 }

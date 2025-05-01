@@ -1,0 +1,20 @@
+#product-overview {
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+}
+
+#product-text-column {
+    display:flex;
+    flex-direction:column;
+    text-align: center;
+}
+
+#product-img {
+    height:20vw;
+    image-rendering: pixelated;
+}
+
+#product-name {
+    text-decoration: underline;
+}

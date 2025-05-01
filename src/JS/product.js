@@ -1,0 +1,39 @@
+let products = [];
+
+const ProductCategory = Object.freeze({
+    HEAD: "hat",
+    TORSO: "torso",
+    LEGS: "legs",
+    FEET: "feet",
+    ACCESSORY: "accessory"
+});
+
+/**
+ * 
+ * @param {string} name 
+ * @param {ProductCategory} category 
+ * @param {number} price 
+ * @param {string} imagePath 
+ * @param {string} description 
+ */
+function Product(name, category, price, imagePath, description) {
+    this.name = name;
+    this.category = category;
+    this.price = price;
+    this.imagePath = imagePath;
+    this.description = description;
+}
+
+function loadProducts() {
+/**
+ * Load products from a JSON.
+ */
+}
+
+products.push(new Product(
+    "Funky Blue T-shirt",
+    ProductCategory.TORSO,
+    30,
+    "../ProductImg/funky-blue-tshirt.png",
+    "A really funky blue t-shirt that is sure to make your Sprite stand out from the crowd."
+));
