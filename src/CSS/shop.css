@@ -6,10 +6,6 @@
     background-color: transparent;
     border:none;
 }
-/* .shop-item:hover {
-    border: solid 4px;
-    border-color: var(--accent-colour4)
-} */
 
 .shop-item img {
     width:75%;
