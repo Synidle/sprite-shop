@@ -1,3 +1,8 @@
+#items-display {
+    display:grid;
+    grid-template-columns:repeat(4, auto);
+}
+
 .shop-item {
     margin:1em;
     width:20vw;
