@@ -13,6 +13,9 @@ document.getElementById("casino-button").addEventListener("click", function(){
     open("casino.html", "_self");
 });
 
+document.getElementById("balance-num-val").innerHTML = 
+    localStorage.getItem(KEY_BALANCE);
+
 userPfpButton.addEventListener("click", function() {
     document.getElementById("user-menu").classList.add("displayed");
 });

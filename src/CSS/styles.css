@@ -134,6 +134,10 @@ input[type="submit"] {
     cursor:pointer;
 }
 
+.warning {
+    color:red;
+}
+
 /* Wide screen */
 
 @media (min-width:901px) {

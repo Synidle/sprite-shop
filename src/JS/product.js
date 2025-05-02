@@ -30,6 +30,17 @@ function loadProducts() {
  */
 }
 
+function tryBuyProduct(product) {
+    let balance = parseInt(JSON.parse(localStorage.getItem(KEY_BALANCE)));
+    if (product.price <= balance) {
+        localStorage.setItem(KEY_BALANCE, balance-product.price);
+        setPurchased(product.name);
+        return true;
+    } 
+    else
+        return false;
+}
+
 products.push(new Product(
     "Funky Blue T-shirt",
     ProductCategory.TORSO,

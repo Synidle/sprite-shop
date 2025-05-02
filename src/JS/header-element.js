@@ -3,7 +3,7 @@ document.querySelector("#header").innerHTML = `
     <div id="icons">
         <!-- <img id="coin-img" src="Data/UI/coin.png" alt="balance"> -->
         <p id="coin-img" class="fa-solid fa-coins"></p>
-        <p id="balance-num">£640</p>
+        <p id="balance-num">£<span id=balance-num-val></span></p>
         <!-- <button id="user-pfp"><img src="Data/UI/user-pfp.png" alt="user profile picture"></button> -->
             <button id="user-pfp-button"><i id="user-pfp-icon" class="fa-solid fa-circle-user"></i></button>
     </div>

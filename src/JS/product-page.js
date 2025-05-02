@@ -8,8 +8,10 @@ document.getElementById("product-name").innerHTML = product.name;
 document.getElementById("product-price").innerHTML = product.price;
 document.getElementById("product-desc").innerHTML = product.description;
 buyButton.addEventListener("click", () => {
-    setPurchased(product.name);
-    location.reload();
+    if (tryBuyProduct(product))
+        location.reload();
+    else
+        document.getElementById("insufficient-balance").hidden = false;
 });
 
 if (getPurchased(product.name)) {
