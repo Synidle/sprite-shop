@@ -39,9 +39,35 @@
     float:right;
 }
 
+/* Very wide screens */
+@media (min-width:1200) {
+    .shop-item {
+        width:10vw;
+        height:10vw;
+    }
+}
+
+/* Wide screens */
+@media (min-width:901px) {
+    .shop-item {
+        width:15vw;
+        height:15vw;
+    }
+}
+
 /* Moderately narrow screen */
 @media (max-width:900px) {
     /* .shop-item {
         margin:0px;
     } */
+}
+
+/* Severely narrow screen */
+@media (max-width:600px) {
+    .item-name {
+        display:none;
+    }
+    .item-price {
+        float:none;
+    }
 }

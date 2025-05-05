@@ -1,7 +1,7 @@
 #product-overview {
     display:flex;
     flex-direction:row;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 #product-text-column {
@@ -12,9 +12,31 @@
 
 #product-img {
     height:20vw;
+    max-height: 250px;
     image-rendering: pixelated;
 }
 
 #product-name {
     text-decoration: underline;
+}
+
+/* Moderately narrow screen */
+@media (max-width:900px) {
+    #product-img {
+        height:30vw;
+    }
+}
+
+/* Severely narrow screen */
+@media (max-width:600px) {
+    #product-overview {
+        display:flex;
+        flex-direction:column;
+    }
+
+    #product-img {
+        width:60%; 
+        height:60%;
+        margin-left:20%;
+    }
 }

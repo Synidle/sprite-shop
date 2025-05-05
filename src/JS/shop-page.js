@@ -1,14 +1,7 @@
 let itemsDisplay = document.querySelector("#items-display");
+let purchaseMap = new Map(JSON.parse(localStorage.getItem(KEY_PURCHASES)));
 
-// for (let productButton of document.querySelectorAll(".product-button")) {
-//     productButton.innerHTML = `
-//         <button class="shop-item">
-//             <img> <br>
-//             <label class="item-name">Name of Product </label>
-//             <label class="item-price">£14</label>
-//         </button>
-//     `;
-// }
+console.log(purchaseMap);
 
 /**
  * Iterate through products and generate a button for each one.
@@ -17,18 +10,20 @@ let itemsDisplay = document.querySelector("#items-display");
  */
 
 for (let p of products) {
-    let productButton = document.createElement("button");
-    productButton.classList.add("shop-item");
-    productButton.addEventListener("click", () => {
-        sessionStorage.setItem(KEY_SELECTEDPRODUCT,
-            JSON.stringify(p)
-        );
-        open("../Pages/product-page.html");
-    });
-    itemsDisplay.appendChild(productButton);
-    productButton.innerHTML += `
-        <img src=${p.imagePath} alt=${p.description}> <br>
-        <label class="item-name">${p.name}</label>
-        <label class="item-price">£${p.price}</label>
-    `;
+    if (!purchaseMap.has(p.name)) {
+        let productButton = document.createElement("button");
+        productButton.classList.add("shop-item");
+        productButton.addEventListener("click", () => {
+            sessionStorage.setItem(KEY_SELECTEDPRODUCT,
+                JSON.stringify(p)
+            );
+            open("../Pages/product-page.html");
+        });
+        itemsDisplay.appendChild(productButton);
+        productButton.innerHTML += `
+            <img src=${p.imagePath} alt=${p.description}> <br>
+            <label class="item-name">${p.name}</label>
+            <label class="item-price">£${p.price}</label>
+        `;
+    }
 }
