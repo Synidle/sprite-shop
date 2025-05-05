@@ -4,6 +4,7 @@ let buyButton = document.getElementById("product-purchase-button");
 document.title = product.name;
 
 document.getElementById("product-img").setAttribute("src", product.imagePath);
+document.getElementById("product-img").setAttribute("alt", product.description);
 document.getElementById("product-name").innerHTML = product.name;
 document.getElementById("product-price").innerHTML = product.price;
 document.getElementById("product-desc").innerHTML = product.description;

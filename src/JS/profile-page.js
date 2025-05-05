@@ -4,7 +4,7 @@ let changeEmailButton = document.getElementById("change-email");
 let emailWarning = document.getElementById("email-warning");
 
 if (currentUserData == null) {
-    setCurrentUser(getLastuser());
+    setCurrentUser(getLastUser());
     currentUserData = getCurrentUser();
 }
 

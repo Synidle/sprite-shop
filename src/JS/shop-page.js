@@ -27,7 +27,7 @@ for (let p of products) {
     });
     itemsDisplay.appendChild(productButton);
     productButton.innerHTML += `
-        <img src=${p.imagePath}> <br>
+        <img src=${p.imagePath} alt=${p.description}> <br>
         <label class="item-name">${p.name}</label>
         <label class="item-price">£${p.price}</label>
     `;
