@@ -1,0 +1,47 @@
+#wardrobe-section {
+    /* display:flex;
+    flex-direction:row;
+    justify-content: space-around; */
+    padding-top:2em;
+    height:50vh;
+    display:grid;
+    grid-template-columns: 80% 20%;
+}
+
+#canvas {
+    border:solid 1px black;
+    height:100%;
+    width:100%;
+}
+
+#wardrobe-menu {
+    list-style: none;
+    padding:0px;
+    margin:0px;
+}
+
+#wardrobe-menu button {
+    width:100%;
+    height:3em;
+}
+
+#wardrobe-menu i {
+    font-size:1.5em;
+    float:left;
+}
+
+@media (min-width:901px) {
+    #wardrobe-section {
+        grid-template-columns: 3fr 1fr .5fr;
+    }
+}
+
+@media (max-width:600px) {
+    #wardrobe-menu i {
+        font-size:2em;
+        float:none;
+    }
+    .wardrobe-menu-text {
+        display:none;
+    }
+}

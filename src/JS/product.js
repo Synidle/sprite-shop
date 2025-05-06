@@ -1,7 +1,7 @@
 let products = [];
 
 const ProductCategory = Object.freeze({
-    HEAD: "hat",
+    HEAD: "head",
     TORSO: "torso",
     LEGS: "legs",
     FEET: "feet",
