@@ -1,6 +1,7 @@
 const KEY_USERDATA = "spriteshop-userdata";
 const KEY_LASTUSER = "spriteshop-lastuser";
 const KEY_SPRITE = "spriteshop-sprite";
+const KEY_APPAREL = "spriteshop-apparel";
 const KEY_BALANCE = "spriteshop-balance";
 const KEY_PURCHASES = "spriteshop-purchases";
 const KEY_SIGNUPDATA = "spriteshop-signupdata";
@@ -13,6 +14,14 @@ function UserData(username, email, password, mailingList) {
     this.email = email;
     this.password = password;
     this.mailingList = mailingList;
+}
+
+function Apparel() {
+    this.head;
+    this.torso;
+    this.legs;
+    this.feet;
+    this.accessory;
 }
 
 function getUserData() {
