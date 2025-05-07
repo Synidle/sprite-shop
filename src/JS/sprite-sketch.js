@@ -6,7 +6,7 @@ const STANDARD_SPRITE_Y_OFFSET = 64;
 const ADDITIONAL_SPRITE_Y_OFFSET = 2;
 
 let canvas;
-let scale = 3;
+let scale = 1;
 
 let headImg;
 let armsImg;
@@ -25,6 +25,7 @@ function preload() {
 }
 
 function setup() {
+    calculateScale();
     canvas = createCanvas(BASE_SIZE*scale, BASE_SIZE*scale);
     canvas.parent("canvas-holder");
     noStroke();
@@ -48,8 +49,29 @@ function draw() {
     counter += deltaTime;
 }
 
-function drawSpriteComponent(componentImage, yOffset=0)
-{
+function windowResized() {
+    let oldScale = scale;
+    calculateScale();
+    if (scale != oldScale)
+        resizeCanvas(BASE_SIZE*scale, BASE_SIZE*scale);
+}
+
+/**
+ * Calculates the value of the scale variable on the basis of the window's width.
+ */
+function calculateScale() {
+    if (windowWidth > 600)
+        scale = 3;
+    else if (windowWidth <= 600)
+        scale = 2;
+}
+
+/**
+ * Draws a part of the sprite.
+ * @param {Image} componentImage part to draw.
+ * @param {number} yOffset offset from the standard sprite Y-offset.
+ */
+function drawSpriteComponent(componentImage, yOffset=0) {
     image(componentImage, width/2, (STANDARD_SPRITE_Y_OFFSET+yOffset)*scale, 
         spriteSize, spriteSize);
 }
