@@ -57,7 +57,8 @@ function windowResized() {
 }
 
 /**
- * Calculates the value of the scale variable on the basis of the window's width.
+ * Calculates the value of the scale variable on the basis of 
+ * the window's width.
  */
 function calculateScale() {
     if (windowWidth > 600)
