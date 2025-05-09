@@ -36,15 +36,10 @@ canvas {
 }
 
 .clothing-item  {
-    border:solid black 1px;
     width: 15vw;
     height:15vw;
     transition: background-color ease-in .1s;
     flex-shrink:0;
-}
-
-.clothing-item:hover {
-    background-color: black;
 }
 
 .clothing-item img {
