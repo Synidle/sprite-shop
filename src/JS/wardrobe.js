@@ -23,6 +23,17 @@ document.getElementById("accessory-button").addEventListener("click", () => {
  */
 function displayWardrobe(type) {
     clothingMenu.innerHTML = "";
+
+    let nudeButton = document.createElement("button");
+    nudeButton.classList.add("clothing-item");
+    nudeButton.addEventListener("click", () => {
+        removeItem(type);
+    });
+    clothingMenu.appendChild(nudeButton);
+    nudeButton.innerHTML += `
+        <i class="fa-solid fa-ban"</i>
+    `;
+
     for (let p of products) {
         if (purchaseMap.has(p.name)) {
             if (p.category == type) {
@@ -33,13 +44,21 @@ function displayWardrobe(type) {
                         wearItem(p);
                     });
                     clothingMenu.appendChild(productButton);
-                    clothingMenu.innerHTML += `
+                    productButton.innerHTML += `
                         <img src=${p.imagePath} alt=${p.description}>
                     `;
                 }
             }
         }
     }
+}
+
+/**
+ * 
+ * @param {ProductCategory} category 
+ */
+function removeItem(category) {
+
 }
 
 /**

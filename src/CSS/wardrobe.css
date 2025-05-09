@@ -42,6 +42,10 @@ canvas {
     flex-shrink:0;
 }
 
+.clothing-item i {
+    font-size:8vw;
+}
+
 .clothing-item img {
     position:inline;
     width:75%;
