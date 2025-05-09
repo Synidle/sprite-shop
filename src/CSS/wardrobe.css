@@ -31,7 +31,6 @@ canvas {
 }
 
 #clothing-menu {
-    position:relative;
     overflow:auto;
     display:flex;
 }
