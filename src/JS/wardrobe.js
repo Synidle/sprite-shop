@@ -58,13 +58,5 @@ function displayWardrobe(type) {
  * @param {ProductCategory} category 
  */
 function removeItem(category) {
-
-}
-
-/**
- * 
- * @param {Product} item 
- */
-function wearItem(item) {
-
+    
 }

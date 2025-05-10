@@ -16,12 +16,38 @@ function UserData(username, email, password, mailingList) {
     this.mailingList = mailingList;
 }
 
+/**
+ * All properties are Product types.
+ */
 function Apparel() {
     this.head;
     this.torso;
     this.legs;
     this.feet;
     this.accessory;
+    /**
+     * 
+     * @param {Product} item 
+     */
+    this.equipItem = function(item) {
+        switch (item.category) {
+            case ProductCategory.HEAD:
+                this.head = item;
+                break;
+            case ProductCategory.TORSO:
+                this.torso = item;
+                break;
+            case ProductCategory.LEGS:
+                this.legs = item;
+                break;
+            case ProductCategory.FEET:
+                this.feet = item;
+                break;
+            case ProductCategory.ACCESSORY:
+                this.accessory = item;
+                break;
+        }
+    }
 }
 
 function getUserData() {
@@ -144,4 +170,27 @@ function getPurchased(productName) {
     if (purchaseMap.get(productName) != undefined)
         return true;
     else {return false;}
+}
+
+/**
+ * 
+ * @param {Apparel} apparel 
+ */
+function setApparel(apparel) {
+    localStorage.setItem(JSON.stringify(apparel));
+}
+
+/**
+ * 
+ * @param {Product} item
+ */
+function wearItem(item) {
+    let apparel;
+    let fromStorage = localStorage.getItem(KEY_APPAREL);
+    apparel = fromStorage == null ? 
+        new Apparel() : JSON.parse(fromStorage);
+    apparel.equipItem(item);
+
+    localStorage.setItem(KEY_APPAREL, 
+        JSON.stringify(apparel));
 }

@@ -1,34 +1,73 @@
 <!DOCTYPE html>
 
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="utf-8">
+        <title>Casino</title>
+        <link href="../FontAwesome/css/all.css" type="text/css" rel="stylesheet">
+        <link href="../CSS/styles.css" rel="stylesheet" type="text/css">
 
-    <title>Casino</title>
-
-    <!-- <link rel="stylesheet" type="text/css" href="../../lib/styles.css"> -->
-    <link href="../FontAwesome/css/all.css" type="text/css" rel="stylesheet">
-    <link href="../CSS/styles.css" rel="stylesheet" type="text/css">
-
-    <script>//switch to html version if detecting screen reader</script>
-    <script src="../../lib/libraries/p5.min.js"></script>
-    <script src="../../lib/libraries/p5.sound.min.js"></script>
-
-    <script src="../JS/data.js"></script>
-    <script src="../JS/check-signedin.js"></script>
-  </head>
-
-  <header>
-    <div id="header"></div>
-  </header>
-
-  <body>
-    <a href="casino-acc.html">Accessible HTML version</a>
-
-    <script src="../JS/header-element.js"></script>
-    <script src="../JS/nav-buttons.js"></script>
-    <script src="../JS/card-game.js"></script>
-    <script src="../JS/sketch.js"></script>
-  </body>
+        <script src="../JS/data.js"></script>
+        <script src="../JS/check-signedin.js"></script>
+    </head>
+    <body>
+        <header>
+            <div id="header"></div>
+        </header>
+        <main>
+            <section id="card-game-frame">
+                <div id="game">
+                    <p id="opponent-hand" hidden></p>
+                    <p id="played-cards"></p>
+                    <p id="placed-card"></p>
+                    <div id="free-cards" hidden>
+                        <button id="free-0"></button>
+                        <button id="free-1"></button>
+                        <button id="free-2"></button>
+                        <button id="free-3"></button>
+                        <button id="free-4"></button>
+                        <button id="free-5"></button>
+                        <button id="free-6"></button>
+                    </div>
+                    <div id="hand">
+                        <button id="hand-0"></button>
+                        <button id="hand-1"></button>
+                        <button id="hand-2"></button>
+                        <button id="hand-3"></button>
+                        <button id="hand-4"></button>
+                        <button id="hand-5"></button>
+                        <button id="hand-6"></button>
+                    </div>
+                    <button id="finished-button">Finished</button>
+                </div>
+                <div id="between-game" hidden>
+                    <p id="result">You win!</p>
+                    <button id="play-button">Play again</button>
+                </div>
+            </section>
+            <section>
+                <h1>How to play Court Jester</h1>
+                <p><i>Court Jester</i> is a card game for two people.</p>
+                <p>To win, you must play a <b>Joker</b>.</p>
+                <p>You always have 7 cards in your hand. When it is your turn, the card you play must be of the same suit or value as the last card played.</p>
+                <p>Cards you play may be played in sequence in the same turn, if they are the same number, or follow consecutively up or down within the same suit.</p>
+                <p><i>Note: the <b>Ace</b> may take the value of any card except the <b>Joker</b>, but not adopt the special properties of a picture card.</i></p>
+                <p>Picture cards have specific conditions for placement within a sequence, and no further cards may be placed after them in a sequence. They also have special properties.</p>
+                <ul>
+                    <li><b>Jack</b> can be played following <i>only</i> cards of the same colour (i.e. it cannot be played in sequence with any card of a different colour). <i>It skips the opponent's turn.</i></li>
+                    <li><b>Queen</b> can be played following a card of any suit. <i>The player may then pick the suit for the opponent to follow.</i></li>
+                    <li><b>King</b> must be played following a card of the same suit. <i>First the player replenishes their hand. Then the opponent gives the player a number of cards equal to those the player played that round, drawn randomly from their own hand. The player then replaces the opponent's card with the same number chosen from their own hand.</i></li>
+                    <li>If the opponent plays a <b>King</b>, the player may reveal they have a <b>Queen</b> of the same suit, and reverse the effect of the opponent's <b>King</b>.</li>
+                    <li><b>Joker</b> may be played following any card. If the opponent has a <b>Joker</b> in their hand, they may play it immediately and win. Otherwise, the player wins.</li>
+                </ul>
+                <p>If the player plays four consecutive cards, or four of the same value, then when drawing from the deck they draw an additional four cards, and from those drawn select four to put back on the top of the deck.</p>
+                <p>When the whole deck has been dealt, it is replenished and reshuffled with all played cards.</p>
+                <p>A player may pass on their turn. If both players pass consecutively, then the game is considered a <i>draw</i>.</p>
+            </section>
+        </main>
+        <script src="../JS/header-element.js"></script>
+        <script src="../JS/nav-buttons.js"></script>
+        <script src="../JS/card-game.js"></script>
+        <script src="../JS/game-html.js"></script>
+    </body>
 </html>
