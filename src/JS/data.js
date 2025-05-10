@@ -25,29 +25,6 @@ function Apparel() {
     this.legs;
     this.feet;
     this.accessory;
-    /**
-     * 
-     * @param {Product} item 
-     */
-    this.equipItem = function(item) {
-        switch (item.category) {
-            case ProductCategory.HEAD:
-                this.head = item;
-                break;
-            case ProductCategory.TORSO:
-                this.torso = item;
-                break;
-            case ProductCategory.LEGS:
-                this.legs = item;
-                break;
-            case ProductCategory.FEET:
-                this.feet = item;
-                break;
-            case ProductCategory.ACCESSORY:
-                this.accessory = item;
-                break;
-        }
-    }
 }
 
 function getUserData() {
@@ -189,7 +166,24 @@ function wearItem(item) {
     let fromStorage = localStorage.getItem(KEY_APPAREL);
     apparel = fromStorage == null ? 
         new Apparel() : JSON.parse(fromStorage);
-    apparel.equipItem(item);
+    
+    switch (item.category) {
+        case ProductCategory.HEAD:
+            apparel.head = item;
+            break;
+        case ProductCategory.TORSO:
+            apparel.torso = item;
+            break;
+        case ProductCategory.LEGS:
+            apparel.legs = item;
+            break;
+        case ProductCategory.FEET:
+            apparel.feet = item;
+            break;
+        case ProductCategory.ACCESSORY:
+            apparel.accessory = item;
+            break;
+    }    
 
     localStorage.setItem(KEY_APPAREL, 
         JSON.stringify(apparel));

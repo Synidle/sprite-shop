@@ -36,8 +36,8 @@ canvas {
 }
 
 .clothing-item  {
-    width: 15vw;
-    height:15vw;
+    width: 10vw;
+    height:10vw;
     transition: background-color ease-in .1s;
     flex-shrink:0;
 }
@@ -68,6 +68,14 @@ canvas {
 @media (min-width:1200px) {
     #wardrobe-section {
         grid-template-columns: 1fr 1fr .25fr 1fr;
+    }
+}
+
+/* Moderately narrow displays */
+@media (max-width:900px) {
+    .clothing-item {
+        width:15vw;
+        height:15vw;
     }
 }
 
