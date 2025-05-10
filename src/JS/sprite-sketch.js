@@ -13,6 +13,8 @@ let armsImg;
 let torsoImg;
 let legsImg;
 
+let spriteApparel = new Map();
+
 let counter = 0;
 let spriteSize;
 let spriteOffset = 0;
@@ -46,6 +48,8 @@ function draw() {
     drawSpriteComponent(armsImg, spriteOffset);
     drawSpriteComponent(headImg);
 
+    drawSpriteApparel();
+
     counter += deltaTime;
 }
 
@@ -75,4 +79,32 @@ function calculateScale() {
 function drawSpriteComponent(componentImage, yOffset=0) {
     image(componentImage, width/2, (STANDARD_SPRITE_Y_OFFSET+yOffset)*scale, 
         spriteSize, spriteSize);
+}
+
+function drawSpriteApparel() {
+    if (spriteApparel.size > 0) {
+        for (let img of spriteApparel.values()) {
+            drawSpriteComponent(img);
+        }
+    }
+}
+
+/**
+ * 
+ * @param {Map<ProductCategory,Product>} apparel 
+ */
+function updateSpriteApparel(apparel) {
+    apparel.forEach(spriteWearItem);
+}
+
+/**
+ * 
+ * @param {Product} item 
+ * @param {ProductCategory} category
+ */
+function spriteWearItem(item, category) {
+    loadImage(item.imagePath, (image) => {
+        spriteApparel.set(category, image);
+        console.log(spriteApparel);
+    });
 }

@@ -9,6 +9,8 @@ const KEY_WINNINGS = "spriteshop-winnings";
 const KEY_CURRENTUSER = "spriteshop-currentuser";
 const KEY_SELECTEDPRODUCT = "spriteshop-selected-product";
 
+let apparel;
+
 function UserData(username, email, password, mailingList) {
     this.username = username;
     this.email = email;
@@ -19,13 +21,13 @@ function UserData(username, email, password, mailingList) {
 /**
  * All properties are Product types.
  */
-function Apparel() {
-    this.head;
-    this.torso;
-    this.legs;
-    this.feet;
-    this.accessory;
-}
+// function Apparel() {
+//     this.head;
+//     this.torso;
+//     this.legs;
+//     this.feet;
+//     this.accessory;
+// }
 
 function getUserData() {
     let jsonData = localStorage.getItem(KEY_USERDATA);
@@ -151,7 +153,7 @@ function getPurchased(productName) {
 
 /**
  * 
- * @param {Apparel} apparel 
+ * @param {Map<ProductCategory,Product>} apparel 
  */
 function setApparel(apparel) {
     localStorage.setItem(JSON.stringify(apparel));
@@ -162,29 +164,12 @@ function setApparel(apparel) {
  * @param {Product} item
  */
 function wearItem(item) {
-    let apparel;
     let fromStorage = localStorage.getItem(KEY_APPAREL);
     apparel = fromStorage == null ? 
-        new Apparel() : JSON.parse(fromStorage);
+        new Map() : new Map(JSON.parse(fromStorage));
     
-    switch (item.category) {
-        case ProductCategory.HEAD:
-            apparel.head = item;
-            break;
-        case ProductCategory.TORSO:
-            apparel.torso = item;
-            break;
-        case ProductCategory.LEGS:
-            apparel.legs = item;
-            break;
-        case ProductCategory.FEET:
-            apparel.feet = item;
-            break;
-        case ProductCategory.ACCESSORY:
-            apparel.accessory = item;
-            break;
-    }    
+    apparel.set(item.category, item);
 
     localStorage.setItem(KEY_APPAREL, 
-        JSON.stringify(apparel));
+        JSON.stringify(Array.from(apparel.entries())));
 }
