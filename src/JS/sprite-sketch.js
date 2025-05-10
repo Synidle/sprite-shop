@@ -4,6 +4,7 @@ const BASE_SIZE = 120;
 const BACKGROUND_COLOUR = "#005c02"
 const STANDARD_SPRITE_Y_OFFSET = 64;
 const ADDITIONAL_SPRITE_Y_OFFSET = 2;
+const CLOTHING_SIZE = 32;
 
 let canvas;
 let scale = 1;
@@ -46,9 +47,12 @@ function draw() {
     drawSpriteComponent(legsImg);
     drawSpriteComponent(torsoImg);
     drawSpriteComponent(armsImg, spriteOffset);
+    if (spriteApparel.has(ProductCategory.TORSO))
+        image(spriteApparel.get(ProductCategory.TORSO), width/2,
+            (STANDARD_SPRITE_Y_OFFSET+4)*scale, 
+            CLOTHING_SIZE*scale, CLOTHING_SIZE*scale);
     drawSpriteComponent(headImg);
 
-    drawSpriteApparel();
 
     counter += deltaTime;
 }
@@ -81,14 +85,6 @@ function drawSpriteComponent(componentImage, yOffset=0) {
         spriteSize, spriteSize);
 }
 
-function drawSpriteApparel() {
-    if (spriteApparel.size > 0) {
-        for (let img of spriteApparel.values()) {
-            drawSpriteComponent(img);
-        }
-    }
-}
-
 /**
  * 
  * @param {Map<ProductCategory,Product>} apparel 
@@ -105,6 +101,5 @@ function updateSpriteApparel(apparel) {
 function spriteWearItem(item, category) {
     loadImage(item.imagePath, (image) => {
         spriteApparel.set(category, image);
-        console.log(spriteApparel);
     });
 }
