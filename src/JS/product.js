@@ -58,6 +58,30 @@ products.push(new Product(
 ));
 
 products.push(new Product(
+    "Wizard's hat",
+    ProductCategory.HEAD,
+    800,
+    "wizard-hat.png",
+    "A whimsical hat once worn by a wizard."
+))
+
+products.push(new Product(
+    "White shirt",
+    ProductCategory.TORSO,
+    30,
+    "white-shirt.png",
+    "A nice white shirt for any occasion."
+));
+
+products.push(new Product(
+    "90's T-shirt",
+    ProductCategory.TORSO,
+    15,
+    "90s-tshirt.png",
+    "A cheap, retro t-shirt."
+));
+
+products.push(new Product(
     "Funky Blue T-shirt",
     ProductCategory.TORSO,
     30,
@@ -66,11 +90,59 @@ products.push(new Product(
 ));
 
 products.push(new Product(
+    "Puffy Blue Coat",
+    ProductCategory.TORSO,
+    120,
+    "puffy-blue-coat.png",
+    "Puffy blue coat."
+));
+
+products.push(new Product(
+    "Lace camisole",
+    ProductCategory.TORSO,
+    10,
+    "lace-camisole.png",
+    "Pink lace camisole with an interesting pattern."
+));
+
+products.push(new Product(
+    "Blue suit",
+    ProductCategory.TORSO,
+    90,
+    "suit.png",
+    "Cheap blue suit."
+))
+
+products.push(new Product(
+    "Jeans",
+    ProductCategory.LEGS,
+    50,
+    "jeans.png",
+    "Blue denim jeans. Supposedly durable."
+));
+
+products.push(new Product(
     "Lime Shorts",
     ProductCategory.LEGS,
     35,
     "lime-shorts.png",
     "Cool green shorts."
+));
+
+products.push(new Product(
+    "Boots",
+    ProductCategory.FEET,
+    80,
+    "boots.png",
+    "Nice blue boots."
+));
+
+products.push(new Product(
+    "Red tie",
+    ProductCategory.ACCESSORY,
+    5,
+    "red-tie.png",
+    "Plain red tie for formal occasions."
 ));
 
 products.push(new Product(
