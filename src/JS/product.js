@@ -24,6 +24,15 @@ function Product(name, category, price, imagePath, description) {
     this.description = description;
 }
 
+/**
+ * 
+ * @param {ProductCategory} category 
+ * @returns {Product}
+ */
+function newNullProduct(category) {
+    return new Product("null", category, 0, "../ProductImg/empty.png", "null");
+}
+
 function loadProducts() {
 /**
  * Load products from a JSON.

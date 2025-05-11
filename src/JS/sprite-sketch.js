@@ -35,6 +35,8 @@ function setup() {
     noSmooth();
     imageMode(CENTER);
     frameRate(FRAMERATE);
+
+    updateSpriteApparel(apparel);
 }
 
 function draw() {

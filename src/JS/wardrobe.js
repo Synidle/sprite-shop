@@ -27,7 +27,8 @@ function displayWardrobe(type) {
     let nudeButton = document.createElement("button");
     nudeButton.classList.add("clothing-item");
     nudeButton.addEventListener("click", () => {
-        removeItem(type);
+        removeClothingItem(type);
+        updateSpriteApparel(apparel);
     });
     clothingMenu.appendChild(nudeButton);
     nudeButton.innerHTML += `
@@ -54,10 +55,3 @@ function displayWardrobe(type) {
     }
 }
 
-/**
- * 
- * @param {ProductCategory} category 
- */
-function removeItem(category) {
-    
-}

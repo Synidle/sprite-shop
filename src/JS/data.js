@@ -9,7 +9,7 @@ const KEY_WINNINGS = "spriteshop-winnings";
 const KEY_CURRENTUSER = "spriteshop-currentuser";
 const KEY_SELECTEDPRODUCT = "spriteshop-selected-product";
 
-let apparel;
+let apparel = getApparel();
 
 function UserData(username, email, password, mailingList) {
     this.username = username;
@@ -151,12 +151,10 @@ function getPurchased(productName) {
     else {return false;}
 }
 
-/**
- * 
- * @param {Map<ProductCategory,Product>} apparel 
- */
-function setApparel(apparel) {
-    localStorage.setItem(JSON.stringify(apparel));
+function getApparel() {
+    let fromStorage = localStorage.getItem(KEY_APPAREL);
+    return fromStorage == null ? 
+        new Map() : new Map(JSON.parse(fromStorage));
 }
 
 /**
@@ -164,12 +162,16 @@ function setApparel(apparel) {
  * @param {Product} item
  */
 function wearItem(item) {
-    let fromStorage = localStorage.getItem(KEY_APPAREL);
-    apparel = fromStorage == null ? 
-        new Map() : new Map(JSON.parse(fromStorage));
-    
     apparel.set(item.category, item);
 
     localStorage.setItem(KEY_APPAREL, 
         JSON.stringify(Array.from(apparel.entries())));
+}
+
+/**
+ * 
+ * @param {ProductCategory} category 
+ */
+function removeClothingItem(category) {
+    apparel.set(category, newNullProduct(category));
 }
