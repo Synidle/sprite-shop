@@ -25,9 +25,8 @@ function Product(name, category, price, imagePath, description) {
 }
 
 /**
- * 
  * @param {ProductCategory} category 
- * @returns {Product}
+ * @returns {Product} Product displaying an empty image.
  */
 function newNullProduct(category) {
     return new Product("null", category, 0, "../ProductImg/empty.png", "null");

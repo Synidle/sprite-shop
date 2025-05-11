@@ -173,5 +173,6 @@ function wearItem(item) {
  * @param {ProductCategory} category 
  */
 function removeClothingItem(category) {
-    apparel.set(category, newNullProduct(category));
+    // Sets item to an empty clothing product.
+    wearItem(newNullProduct(category));
 }
