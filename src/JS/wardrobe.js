@@ -38,18 +38,16 @@ function displayWardrobe(type) {
     for (let p of products) {
         if (purchaseMap.has(p.name)) {
             if (p.category == type) {
-                for (let i = 0; i < 16; i ++) {
-                    let productButton = document.createElement("button");
-                    productButton.classList.add("clothing-item");
-                    productButton.addEventListener("click", () => {
-                        wearItem(p);
-                        updateSpriteApparel(apparel);
-                    });
-                    clothingMenu.appendChild(productButton);
-                    productButton.innerHTML += `
-                        <img src=${p.imagePath} alt=${p.description}>
-                    `;
-                }
+                let productButton = document.createElement("button");
+                productButton.classList.add("clothing-item");
+                productButton.addEventListener("click", () => {
+                    wearItem(p);
+                    updateSpriteApparel(apparel);
+                });
+                clothingMenu.appendChild(productButton);
+                productButton.innerHTML += `
+                    <img src=${p.imagePath} alt=${p.description}>
+                `;
             }
         }
     }

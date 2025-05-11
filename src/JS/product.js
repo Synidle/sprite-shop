@@ -16,11 +16,11 @@ const ProductCategory = Object.freeze({
  * @param {string} imagePath 
  * @param {string} description 
  */
-function Product(name, category, price, imagePath, description) {
+function Product(name, category, price, imageName, description) {
     this.name = name;
     this.category = category;
     this.price = price;
-    this.imagePath = imagePath;
+    this.imagePath = "../ProductImg/"+imageName;
     this.description = description;
 }
 
@@ -29,7 +29,7 @@ function Product(name, category, price, imagePath, description) {
  * @returns {Product} Product displaying an empty image.
  */
 function newNullProduct(category) {
-    return new Product("null", category, 0, "../ProductImg/empty.png", "null");
+    return new Product("null", category, 0, "empty.png", "null");
 }
 
 function loadProducts() {
@@ -50,9 +50,33 @@ function tryBuyProduct(product) {
 }
 
 products.push(new Product(
+    "Red Beanie",
+    ProductCategory.HEAD,
+    15,
+    "red-beanie.png",
+    "A warm red beanie."
+));
+
+products.push(new Product(
     "Funky Blue T-shirt",
     ProductCategory.TORSO,
     30,
-    "../ProductImg/funky-blue-tshirt.png",
+    "funky-blue-tshirt.png",
     "A really funky blue t-shirt that is sure to make your Sprite stand out from the crowd."
 ));
+
+products.push(new Product(
+    "Lime Shorts",
+    ProductCategory.LEGS,
+    35,
+    "lime-shorts.png",
+    "Cool green shorts."
+));
+
+products.push(new Product(
+    "Gold Amulet",
+    ProductCategory.ACCESSORY,
+    6000,
+    "amulet.png",
+    "Exquisite gold amulet, bearing a striking red jewel."
+))

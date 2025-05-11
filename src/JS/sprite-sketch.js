@@ -49,14 +49,26 @@ function draw() {
     drawSpriteComponent(legsImg);
     drawSpriteComponent(torsoImg);
     drawSpriteComponent(armsImg, spriteOffset);
-    if (spriteApparel.has(ProductCategory.TORSO))
-        image(spriteApparel.get(ProductCategory.TORSO), width/2,
-            (STANDARD_SPRITE_Y_OFFSET+4)*scale, 
-            CLOTHING_SIZE*scale, CLOTHING_SIZE*scale);
+    drawClothing(ProductCategory.TORSO, 4);
+    drawClothing(ProductCategory.LEGS, 20, .5);
+    drawClothing(ProductCategory.ACCESSORY, 4, .5);
     drawSpriteComponent(headImg);
+    drawClothing(ProductCategory.HEAD, -28);
 
 
     counter += deltaTime;
+}
+
+/**
+ * 
+ * @param {ProductCategory} category 
+ * @param {number} additionalYOffset
+ */
+function drawClothing(category, additionalYOffset=0, scaleModifier=1) {
+    if (spriteApparel.has(category))
+        image(spriteApparel.get(category), width/2,
+            (STANDARD_SPRITE_Y_OFFSET+additionalYOffset)*scale,
+            CLOTHING_SIZE*scale*scaleModifier, CLOTHING_SIZE*scale*scaleModifier);
 }
 
 function windowResized() {
