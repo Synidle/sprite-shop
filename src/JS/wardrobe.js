@@ -41,7 +41,10 @@ function displayWardrobe(type) {
                 let productButton = document.createElement("button");
                 productButton.classList.add("clothing-item");
                 productButton.addEventListener("click", () => {
-                    wearItem(p);
+                    if (apparel.get(type) == p)
+                        removeClothingItem(type);
+                    else
+                        wearItem(p);
                     updateSpriteApparel(apparel);
                 });
                 clothingMenu.appendChild(productButton);
