@@ -55,15 +55,11 @@
     }
 }
 
-/* Moderately narrow screen */
-@media (max-width:900px) {
-    /* .shop-item {
-        margin:0px;
-    } */
-}
-
 /* Severely narrow screen */
 @media (max-width:600px) {
+    #items-display {
+        grid-template-columns: repeat(3, auto);
+    }
     .item-name {
         display:none;
     }
