@@ -49,11 +49,11 @@ function draw() {
     drawSpriteComponent(legsImg);
     drawSpriteComponent(torsoImg);
     drawSpriteComponent(armsImg, spriteOffset);
-    drawClothing(ProductCategory.TORSO, 4);
+    drawClothing(ProductCategory.TORSO, 4, .75);
     drawClothing(ProductCategory.LEGS, 20, .5);
     drawClothing(ProductCategory.ACCESSORY, 4, .5);
     drawSpriteComponent(headImg);
-    drawClothing(ProductCategory.HEAD, -28);
+    drawClothing(ProductCategory.HEAD, -28, .75);
 
 
     counter += deltaTime;

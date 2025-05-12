@@ -17,7 +17,7 @@ for (let p of products) {
             sessionStorage.setItem(KEY_SELECTEDPRODUCT,
                 JSON.stringify(p)
             );
-            open("../Pages/product-page.html");
+            open("../Pages/product-page.html", "_self");
         });
         itemsDisplay.appendChild(productButton);
         productButton.innerHTML += `
