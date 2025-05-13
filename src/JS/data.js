@@ -8,8 +8,10 @@ const KEY_SIGNUPDATA = "spriteshop-signupdata";
 const KEY_WINNINGS = "spriteshop-winnings";
 const KEY_CURRENTUSER = "spriteshop-currentuser";
 const KEY_SELECTEDPRODUCT = "spriteshop-selected-product";
+const KEY_BUSINESSES = "spriteshop-businesses";
 
 let apparel = getApparel();
+let ownedBusinesses = getBusinesses();
 
 function UserData(username, email, password, mailingList) {
     this.username = username;
@@ -175,4 +177,16 @@ function wearItem(item) {
 function removeClothingItem(category) {
     // Sets item to an empty clothing product.
     wearItem(newNullProduct(category));
+}
+
+function getBusinesses() {
+    let fromStorage = localStorage.getItem(KEY_BUSINESSES);
+    return fromStorage == null ? 
+        [] : JSON.parse(fromStorage);
+}
+
+function addBusiness(name) {
+    ownedBusinesses.push(name);
+    localStorage.setItem(KEY_BUSINESSES,
+        JSON.stringify(ownedBusinesses));
 }
