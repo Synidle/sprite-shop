@@ -27,6 +27,12 @@ main {
     padding: 2em 2em;
 }
 
+a {
+    text-decoration:none;
+    color:var(--accent-colour3);
+    font-weight: bold;
+}
+
 h1#page-title  {
     font-family: var(--title-font);
     font-size: 6em;
