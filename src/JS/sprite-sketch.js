@@ -7,7 +7,7 @@ const ADDITIONAL_SPRITE_Y_OFFSET = 2;
 const CLOTHING_SIZE = 32;
 
 let canvas;
-let scale = 1;
+let globalScaleModifier = 1;
 
 let headImg;
 let armsImg;
@@ -29,7 +29,9 @@ function preload() {
 
 function setup() {
     calculateScale();
-    canvas = createCanvas(BASE_SIZE*scale, BASE_SIZE*scale);
+    canvas = createCanvas(
+        BASE_SIZE*globalScaleModifier, 
+        BASE_SIZE*globalScaleModifier);
     canvas.parent("canvas-holder");
     noStroke();
     noSmooth();
@@ -42,11 +44,15 @@ function setup() {
 function draw() {
     background(BACKGROUND_COLOUR);
 
-    spriteSize = headImg.width * scale;
+    spriteSize = headImg.width * globalScaleModifier;
     spriteOffset = sin(counter * ANIMATION_SPEED) 
         * ADDITIONAL_SPRITE_Y_OFFSET;
 
     drawSpriteComponent(legsImg);
+    drawClothing(ProductCategory.FEET, 24, .5, 8);
+    // Draw flipped shoe.
+    push(); translate(width, 0); scale(-1, 1);
+    drawClothing(ProductCategory.FEET, 24, .5, 8); pop();
     drawSpriteComponent(torsoImg);
     drawSpriteComponent(armsImg, spriteOffset);
     drawClothing(ProductCategory.TORSO, 4, .75);
@@ -64,18 +70,21 @@ function draw() {
  * @param {ProductCategory} category 
  * @param {number} additionalYOffset
  */
-function drawClothing(category, additionalYOffset=0, scaleModifier=1) {
-    if (spriteApparel.has(category))
-        image(spriteApparel.get(category), width/2,
-            (STANDARD_SPRITE_Y_OFFSET+additionalYOffset)*scale,
-            CLOTHING_SIZE*scale*scaleModifier, CLOTHING_SIZE*scale*scaleModifier);
+function drawClothing(category, additionalYOffset=0, scaleModifier=1, xOffset=0) {
+    if (spriteApparel.has(category)) {
+        image(spriteApparel.get(category), 
+            width/2 + (xOffset*globalScaleModifier),
+            (STANDARD_SPRITE_Y_OFFSET+additionalYOffset)*globalScaleModifier,
+            CLOTHING_SIZE*globalScaleModifier*scaleModifier, 
+            CLOTHING_SIZE*globalScaleModifier*scaleModifier);
+    }
 }
 
 function windowResized() {
-    let oldScale = scale;
+    let oldScale = globalScaleModifier;
     calculateScale();
-    if (scale != oldScale)
-        resizeCanvas(BASE_SIZE*scale, BASE_SIZE*scale);
+    if (globalScaleModifier != oldScale)
+        resizeCanvas(BASE_SIZE*globalScaleModifier, BASE_SIZE*globalScaleModifier);
 }
 
 /**
@@ -84,9 +93,9 @@ function windowResized() {
  */
 function calculateScale() {
     if (windowWidth > 600)
-        scale = 3;
+        globalScaleModifier = 3;
     else if (windowWidth <= 600)
-        scale = 2;
+        globalScaleModifier = 2;
 }
 
 /**
@@ -95,7 +104,8 @@ function calculateScale() {
  * @param {number} yOffset offset from the standard sprite Y-offset.
  */
 function drawSpriteComponent(componentImage, yOffset=0) {
-    image(componentImage, width/2, (STANDARD_SPRITE_Y_OFFSET+yOffset)*scale, 
+    image(componentImage, width/2, 
+        (STANDARD_SPRITE_Y_OFFSET+yOffset)*globalScaleModifier, 
         spriteSize, spriteSize);
 }
 

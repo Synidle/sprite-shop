@@ -13,6 +13,10 @@ document.getElementById("casino-button").addEventListener("click", function(){
     open("casino.html", "_self");
 });
 
+document.getElementById("business-button").addEventListener("click", function() {
+    open("business.html", "_self");
+});
+
 document.getElementById("balance-num-val").innerHTML = 
     localStorage.getItem(KEY_BALANCE);
 
