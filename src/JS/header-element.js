@@ -19,3 +19,8 @@ document.querySelector("#header").innerHTML = `
         <button id="business-button"><i class="fa-solid fa-money-bill-trend-up"></i><span class="nav-button-text"> Business</span></button>
     </nav>
 `;
+
+function updateBalanceHeader() {
+    document.getElementById("balance-num-val").innerHTML = 
+        localStorage.getItem(KEY_BALANCE);
+}

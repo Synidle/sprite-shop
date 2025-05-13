@@ -92,10 +92,13 @@ function tryBuyBusiness(business) {
 }
 
 function updateBusinesses() {
-    for (let b of ownedBusinesses.keys()) {
-        let progress = document.getElementById(`progress-${b}`);
+    let balance = parseInt(JSON.parse(localStorage.getItem(KEY_BALANCE)));
+    for (let b of ownedBusinesses.values()) {
+        let progress = document.getElementById(`progress-${b.id}`);
         progress.value ++;
         if (progress.value == progress.max) {
+            localStorage.setItem(KEY_BALANCE, balance+b.profit);
+            updateBalanceHeader();
             progress.value = 0;
         }
     }
