@@ -95,11 +95,14 @@ function updateBusinesses() {
     let balance = parseInt(JSON.parse(localStorage.getItem(KEY_BALANCE)));
     for (let b of ownedBusinesses.values()) {
         let progress = document.getElementById(`progress-${b.id}`);
-        progress.value ++;
-        if (progress.value == progress.max) {
-            localStorage.setItem(KEY_BALANCE, balance+b.profit);
-            updateBalanceHeader();
-            progress.value = 0;
+        if (progress != null) {
+            progress.value ++;
+            if (progress.value == progress.max) {
+                balance = balance+b.profit;
+                localStorage.setItem(KEY_BALANCE, balance);
+                updateBalanceHeader();
+                progress.value = 0;
+            }
         }
     }
 }
