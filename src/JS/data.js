@@ -182,11 +182,15 @@ function removeClothingItem(category) {
 function getBusinesses() {
     let fromStorage = localStorage.getItem(KEY_BUSINESSES);
     return fromStorage == null ? 
-        [] : JSON.parse(fromStorage);
+        new Map() : new Map(JSON.parse(fromStorage));
 }
 
-function addBusiness(name) {
-    ownedBusinesses.push(name);
+/**
+ * 
+ * @param {Business} business 
+ */
+function addBusiness(business) {
+    ownedBusinesses.set(business.id, business);
     localStorage.setItem(KEY_BUSINESSES,
-        JSON.stringify(ownedBusinesses));
+        JSON.stringify(Array.from(ownedBusinesses.entries())));
 }
