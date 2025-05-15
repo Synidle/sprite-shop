@@ -20,6 +20,12 @@ const GameState = Object.freeze({
     DRAW: "draw"
 });
 
+/**
+ * 
+ * @param {string} value 
+ * @param {string} suit 
+ * @param {boolean} isJoker 
+ */
 function Card(value, suit, isJoker=false) {
     this.value = value;
     this.suit = suit;
