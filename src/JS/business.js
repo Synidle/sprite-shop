@@ -55,13 +55,19 @@ setInterval(updateBusinesses, 1000);
 
 for (let b of allBusinesses) {
     let businessDiv = document.createElement("div");
+    let leftCol = document.createElement("div");
+    let rightCol = document.createElement("div");
     businessDiv.classList.add("business");
+    leftCol.classList.add("left-column");
+    rightCol.classList.add("right-column");
     businessList.appendChild(businessDiv);
-    businessDiv.innerHTML = `
+    businessDiv.appendChild(leftCol);
+    businessDiv.appendChild(rightCol);
+    leftCol.innerHTML = `
         <label>${b.name}</label>
     `;
     if (ownedBusinesses.has(b.id)) {
-        businessDiv.innerHTML += `
+        rightCol.innerHTML += `
             <progress id="progress-${b.id}" value=0 max="${b.duration}"></progress>
         `;
     }
@@ -72,7 +78,7 @@ for (let b of allBusinesses) {
             if (tryBuyBusiness(b))
                 location.reload();
         });
-        businessDiv.appendChild(purchaseButton);
+        rightCol.appendChild(purchaseButton);
         purchaseButton.innerHTML = `£${b.cost}`;
     }
 }

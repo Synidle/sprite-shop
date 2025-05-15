@@ -1,0 +1,31 @@
+#business-list {
+    width:50%;
+}
+
+.business {
+    width:100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.business .left-column {
+    text-align: center;
+}
+
+.business .right-column {
+    text-align: center;
+}
+
+/* Moderately narrow screen */
+@media (max-width:900px) {
+    #business-list {
+        width:80%;
+    }
+}
+
+/* Severely narrow screen */
+@media (max-width:600px) {
+    #business-list {
+        width:100%;
+    }
+}

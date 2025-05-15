@@ -24,7 +24,7 @@ header {
 
 main {
     background-color: var(--primary-background);
-    padding: 2em 2em;
+    padding: 3em 2em;
 }
 
 a {
@@ -162,9 +162,9 @@ input[type="submit"] {
 }
 
 /* Moderately narrow screen */
-@media (max-width:900px) {
+@media (max-width:950px) {
     main {
-        padding: 0px 0px;
+        padding: 2em 0px;
     }
     h1#page-title {
         font-size:4em;
