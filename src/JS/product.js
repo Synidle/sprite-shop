@@ -152,3 +152,59 @@ products.push(new Product(
     "amulet.png",
     "Exquisite gold amulet, bearing a striking red jewel."
 ))
+
+products.push(new Product(
+    "Fast Shoes",
+    ProductCategory.FEET,
+    10000,
+    "fast-shoes.png",
+    "Really really super-fast shoes."
+));
+
+products.push(new Product(
+    "Crown",
+    ProductCategory.HEAD,
+    10000,
+    "gold-crown.png",
+    "Golden crown, made for a king."
+));
+
+products.push(new Product(
+    "Helicopter Hat",
+    ProductCategory.HEAD,
+    100,
+    "helicopter-hat.png",
+    "A colourful hat with a propeller on top."
+));
+
+products.push(new Product(
+    "Trainers",
+    ProductCategory.FEET,
+    50,
+    "trainer.png",
+    "Simple trainers."
+));
+
+products.push(new Product(
+    "Night Hat",
+    ProductCategory.HEAD,
+    11,
+    "night-hat.png",
+    "A hat for sleeping in, and nighttime wanderings."
+));
+
+products.push(new Product(
+    "Pink bow",
+    ProductCategory.HEAD,
+    3,
+    "hair-bow.png",
+    "A pink bow, for one's hair. Looks cute."
+));
+
+products.push(new Product(
+    "Bow-tie",
+    ProductCategory.ACCESSORY,
+    10,
+    "bow-tie.png",
+    "A smart bow-tie. Perfect for balls."
+));
