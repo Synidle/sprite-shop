@@ -1,25 +1,10 @@
 let gameScreen = document.getElementById("game");
-let handButtons = [
-    document.getElementById("hand-0"),
-    document.getElementById("hand-1"),
-    document.getElementById("hand-2"),
-    document.getElementById("hand-3"),
-    document.getElementById("hand-4"),
-    document.getElementById("hand-5"),
-    document.getElementById("hand-6")
-];
-let freeCardButtons = [
-    document.getElementById("free-0"),
-    document.getElementById("free-1"),
-    document.getElementById("free-2"),
-    document.getElementById("free-3"),
-    document.getElementById("free-4"),
-    document.getElementById("free-5"),
-    document.getElementById("free-6"),
-];
-let placedCardP = document.getElementById("placed-card");
-let playedCardsP = document.getElementById("played-cards");
-let opponentHandP = document.getElementById("opponent-hand");
+let handButtons = [];
+let freeCardButtons = [];
+let playerHandSec = document.getElementById("hand");
+let placedCardSec = document.getElementById("placed-card");
+let playedCardsSec = document.getElementById("played-cards");
+let opponentHandSec = document.getElementById("opponent-hand");
 
 let betweenGameScreen = document.getElementById("between-game");
 let resultP = document.getElementById("result");
@@ -35,7 +20,7 @@ function startGame() {
 }
 
 /**
- * 
+ * Shows the end of game message.
  * @param {GameState} gameState 
  */
 function endGame(gameState) {
@@ -56,11 +41,12 @@ function endGame(gameState) {
 }
 
 function setHand() {
+    playerHandSec.innerHTML = "";
     for (let i = 0; i < 7; i ++) {
-        handButtons[i].hidden = false;
         try {
-            handButtons[i].innerHTML = hand[i].string();
-        } catch {
+            createCardHTML(playerHandSec, hand[i], () => {onPlayCard(hand[i])});
+        }
+        catch {
             console.log("ERROR");
             console.log(hand);
             printHand(hand);
@@ -103,6 +89,14 @@ function disableInvalidCards() {
             handButtons[i].disabled = true;
         } else {handButtons[i].disabled = false;}
     }
+}
+
+/**
+ * 
+ * @param {Card} card 
+ */
+function onPlayCard(card) {
+    console.log(`Play ${card.value} of ${card.suit}.`);
 }
 
 startGame();

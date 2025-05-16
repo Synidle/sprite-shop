@@ -15,37 +15,18 @@
             <div id="header"></div>
         </header>
         <main>
-            <section id="card-game-frame">
+            <section id="game">
                 <!-- Should have relevant sections and labels
                  for accessibility -->
-                <div id="game">
-                    <p id="opponent-hand" hidden></p>
-                    <p id="played-cards"></p>
-                    <p id="placed-card"></p>
-                    <div id="free-cards" hidden>
-                        <button id="free-0"></button>
-                        <button id="free-1"></button>
-                        <button id="free-2"></button>
-                        <button id="free-3"></button>
-                        <button id="free-4"></button>
-                        <button id="free-5"></button>
-                        <button id="free-6"></button>
-                    </div>
-                    <div id="hand">
-                        <button id="hand-0"></button>
-                        <button id="hand-1"></button>
-                        <button id="hand-2"></button>
-                        <button id="hand-3"></button>
-                        <button id="hand-4"></button>
-                        <button id="hand-5"></button>
-                        <button id="hand-6"></button>
-                    </div>
-                    <button id="finished-button">Finished</button>
-                </div>
-                <div id="between-game" hidden>
-                    <p id="result">You win!</p>
-                    <button id="play-button">Play again</button>
-                </div>
+                <section id="opponent-hand"></section>
+                <section id="played-cards"></section>
+                <section id="free-cards"></section>
+                <section id="hand"></section>
+                <button id="finished-button">Finished</button>
+            </section>
+            <section id="between-game" hidden>
+                <p id="result">You win!</p>
+                <button id="play-button">Play again</button>
             </section>
             <section>
                 <h1>How to play Court Jester</h1>
@@ -70,7 +51,7 @@
         <script src="../JS/header-element.js"></script>
         <script src="../JS/nav-buttons.js"></script>
         <script src="../JS/card-game.js"></script>
-        <script src="../JS/game-html.js"></script>
         <script src="../JS/casino.js"></script>
+        <script src="../JS/game-html.js"></script>
     </body>
 </html>
