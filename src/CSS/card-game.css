@@ -1,0 +1,14 @@
+button.card {
+    background-color: transparent;
+    border:none;
+
+    transition:background-color ease-in .12s;
+}
+
+button.card:hover {
+    background-color:red;
+}
+
+button.card:disabled {
+    background-color: black;
+}
