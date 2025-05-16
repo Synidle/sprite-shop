@@ -1,6 +1,13 @@
+.card img {
+    height:100%;
+    image-rendering: pixelated;
+}
+
 button.card {
     background-color: transparent;
     border:none;
+    width:10em;
+    height:10em;
 
     transition:background-color ease-in .12s;
 }
@@ -11,4 +18,9 @@ button.card:hover {
 
 button.card:disabled {
     background-color: black;
+}
+
+/* Severely narrow screen */
+@media (max-width:600px) {
+
 }
