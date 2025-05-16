@@ -42,9 +42,10 @@ function endGame(gameState) {
 
 function setHand() {
     playerHandSec.innerHTML = "";
+    handButtons = [];
     for (let i = 0; i < 7; i ++) {
         try {
-            createCardHTML(playerHandSec, hand[i], () => {onPlayCard(hand[i])});
+            handButtons.push(createCardButtonHTML(playerHandSec, hand[i], () => {onPlayCard(hand[i])}));
         }
         catch {
             console.log("ERROR");
@@ -55,31 +56,48 @@ function setHand() {
 }
 
 function setPlacedCard(opponentTurn = false) {
-    placedCardP.innerHTML = getTopCard().string();
-    if (opponentTurn)
-        placedCardP.innerHTML = "Computer placed: " + placedCardP.innerHTML;
+    placedCardSec.innerHTML = "";
+    createCardImageHTML(placedCardSec, getTopCard());
+
+    // placedCardSec.innerHTML = getTopCard().string();
+    // if (opponentTurn)
+    //     placedCardP.innerHTML = "Computer placed: " + placedCardP.innerHTML;
 }
 
 function setPlayedCards() {
     if (playedCards.length > 1) {
-        let s = "Played in sequence: (";
-        for (let i = 0; i < playedCards.length - 2; i ++)
-            s += `${playedCards[i].string()}, `;
-        s += `${playedCards[playedCards.length-2].string()})`;
-        playedCardsP.innerHTML = s;
+        for (let i = 0; i < playedCards.length - 2; i++)
+            createCardImageHTML(playedCardsSec, playedCards[i]);
+        createCardImageHTML(playedCardsSec, playedCards[playedCards.length-2]);
     }
     else {
-        playedCardsP.hidden = true;
+        playedCardsSec.hidden = true;
     }
+
+    // if (playedCards.length > 1) {
+    //     let s = "Played in sequence: (";
+    //     for (let i = 0; i < playedCards.length - 2; i ++)
+    //         s += `${playedCards[i].string()}, `;
+    //     s += `${playedCards[playedCards.length-2].string()})`;
+    //     playedCardsP.innerHTML = s;
+    // }
+    // else {
+    //     playedCardsP.hidden = true;
+    // }
 }
 
 function showOpponentHand() {
-    let s =  ""
-    for (let c of oppHand) {
-        s += `${c.string()} `;
-    }
-    opponentHandP.hidden = false;
-    opponentHandP.innerHTML = s;
+    opponentHandSec.innerHTML = "";
+    for (let c of oppHand)
+        createCardImageHTML(opponentHandSec, c);
+    opponentHandSec.hidden = false;
+
+    // let s =  ""
+    // for (let c of oppHand) {
+    //     s += `${c.string()} `;
+    // }
+    // opponentHandP.hidden = false;
+    // opponentHandP.innerHTML = s;
 }
 
 // change to set card validity
