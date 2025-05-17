@@ -1,16 +1,24 @@
+let bet = 0;
 let gameScreen = document.getElementById("game");
+let betScreen = document.getElementById("bet");
+let betInput = document.getElementById("bet-input");
+let betWarning = document.getElementById("bet-warning");
 let handButtons = [];
 let freeCardButtons = [];
 let playerHandSec = document.getElementById("hand");
 let placedCardSec = document.getElementById("placed-card");
 let playedCardsSec = document.getElementById("played-cards");
 let opponentHandSec = document.getElementById("opponent-hand");
+let finishTurnButton = document.getElementById("finished-button");
 
+// PROBABLY DON'T NEED THIS
 let betweenGameScreen = document.getElementById("between-game");
+
 let resultP = document.getElementById("result");
 
 function startGame() {
     gameScreen.hidden = false;
+    betScreen.hidden = true;
     betweenGameScreen.hidden = true;
     setUp();
     setHand();
@@ -45,7 +53,8 @@ function setHand() {
     handButtons = [];
     for (let i = 0; i < 7; i ++) {
         try {
-            handButtons.push(createCardButtonHTML(playerHandSec, hand[i], () => {onPlayCard(hand[i])}));
+            handButtons.push(createCardButtonHTML(playerHandSec, hand[i], 
+                (cardButton) => {onPlayCard(hand[i], cardButton)}));
         }
         catch {
             console.log("ERROR");
@@ -100,42 +109,80 @@ function showOpponentHand() {
     // opponentHandP.innerHTML = s;
 }
 
-// change to set card validity
+/**
+ * Disables cards that cannot be played.
+ * @returns {number} Number of cards that are valid.
+ */
 function disableInvalidCards() {
+    let numValid = 0;
     for (let i = 0; i < 7; i ++) {
         if (!isValidByIndex(i)) {
             handButtons[i].disabled = true;
-        } else {handButtons[i].disabled = false;}
+        } else {
+            handButtons[i].disabled = false;
+            numValid ++;
+        }
     }
+    return numValid;
 }
 
 /**
  * 
  * @param {Card} card 
+ * @param {Node} cardNode
  */
-function onPlayCard(card) {
+function onPlayCard(card, cardNode) {
     console.log(`Play ${card.value} of ${card.suit}.`);
+    // DO I NEED THIS FUNCTION TO DIFFERENTIATE HANDS?
+    if (playCard(card, hand)) {
+        cardNode.hidden = true;
+        setPlacedCard();
+        if (disableInvalidCards() == 0)
+            finishTurnButton.classList.add("highlighted");
+        else 
+            finishTurnButton.classList.remove("highlighted");
+    } 
+    else {
+        alert("You cannot play that card.");
+    }
 }
 
-startGame();
-
-document.getElementById("play-button").addEventListener("click", () => {
-    startGame();
+document.getElementById("place-bet").addEventListener("click", () => {
+    bet = parseInt(betInput.value);
+    if (bet <= parseInt(localStorage.getItem(KEY_BALANCE)))
+        startGame();
 });
 
-for (let i = 0; i < 7; i ++) {
-    handButtons[i].addEventListener("click", () => {
-        if (playCardByIndex(i)) {
-            handButtons[i].hidden = true;
-            setPlacedCard();
-            disableInvalidCards();
-        } else {
-            alert("You cannot play that card.");
-        }
-    });
-}
+betInput.addEventListener("change", () => {
+    bet = parseInt(betInput.value);
+    if (bet > parseInt(localStorage.getItem(KEY_BALANCE)))
+        betWarning.hidden = false;
+    else
+        betWarning.hidden = true;
+});
 
-document.getElementById("finished-button").addEventListener("click", () => {
+// document.getElementById("play-button").addEventListener("click", () => {
+//     startGame();
+// });
+
+// // THIS IS WHAT ISN'T WORKING
+// // INSTEAD USE onPlayCard()
+// for (let i = 0; i < 7; i ++) {
+//     handButtons[i].addEventListener("click", () => {
+//         if (playCardByIndex(i)) {
+//             handButtons[i].hidden = true;
+//             setPlacedCard();
+//             if (disableInvalidCards() == 0)
+//                 finishTurnButton.classList.add("highlighted");
+//             else 
+//                 finishTurnButton.classList.remove("highlighted");
+//         } else {
+//             alert("You cannot play that card.");
+//         }
+//     });
+// }
+
+finishTurnButton.addEventListener("click", () => {
     completeRound(endGame);
     setHand();
     console.log("\n\n");

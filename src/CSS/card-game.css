@@ -20,6 +20,18 @@ button.card:disabled {
     background-color: black;
 }
 
+button#finished-button {
+    font-size:4em;
+}
+
+button.highlighted {
+    background-color: greenyellow;
+    transition: background-color ease-in .1s;
+}
+button.highlighted:hover {
+    background-color: green;
+}
+
 /* Severely narrow screen */
 @media (max-width:600px) {
 

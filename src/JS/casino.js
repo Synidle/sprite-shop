@@ -4,6 +4,7 @@
  * 
  * @param {Node} parent 
  * @param {Card} card 
+ * @param {function(HTMLButtonElement)} onClick
  * @returns {HTMLButtonElement}
  */
 function createCardButtonHTML(parent, card, onClick) {
@@ -11,7 +12,7 @@ function createCardButtonHTML(parent, card, onClick) {
     cardButton.innerHTML = `
         <image src="../Cards/${getCardImage(card)}.png" alt="${card.value} of ${card.suit}">
     `;
-    cardButton.addEventListener("click", onClick);
+    cardButton.addEventListener("click", () => onClick(cardButton));
     cardButton.classList.add("card");
     parent.appendChild(cardButton);
     return cardButton;

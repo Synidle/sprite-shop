@@ -95,6 +95,12 @@ function drawCards(toHand) {
     //return toHand;
 }
 
+/**
+ * 
+ * @param {Card} card 
+ * @param {Card[]} fromHand 
+ * @returns 
+ */
 function playCard(card, fromHand) {
     if (isValid(card)) {
         if (getTopCard().isJoker) {

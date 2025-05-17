@@ -17,7 +17,13 @@
             <div id="header"></div>
         </header>
         <main>
-            <section id="game">
+            <section id="bet">
+                <label for="bet-input">Bet: £</label>
+                <input id="bet-input" type="number" min="0">
+                <button id="place-bet">Play</button>
+                <p class="warning" id="bet-warning" hidden>Insufficient balance to make bet.</p>
+            </section>
+            <section id="game" hidden>
                 <!-- Should have relevant sections and labels
                  for accessibility -->
                 <label for="opponent-hand">Opponent Hand</label>
@@ -30,7 +36,7 @@
                 <section id="free-cards"></section>
                 <label for="hand">Hand</label>
                 <section id="hand"></section>
-                <button id="finished-button">Finished</button>
+                <button id="finished-button"><i class="fa-solid fa-arrow-right"></i></button>
             </section>
             <section id="between-game" hidden>
                 <p id="result">You win!</p>
