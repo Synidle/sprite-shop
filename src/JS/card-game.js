@@ -192,8 +192,13 @@ function completeRound(endGameCallback=null) {
     if (endGameCallback != null) {
         if (gameState != GameState.PLAY) {
             endGameCallback(gameState);
-        } else {playerTurn = !playerTurn;}
-    } else {playerTurn = !playerTurn;}
+        } else {switchTurn();}
+    } else {switchTurn();}
+}
+
+function switchTurn() {
+    if (cardSpecial != CardSpecial.JACK)
+        playerTurn = !playerTurn;
 }
 
 function doOpponentTurn() {

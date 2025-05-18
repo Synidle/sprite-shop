@@ -208,9 +208,19 @@ finishTurnButton.addEventListener("click", () => {
     console.log("//");
     completeRound(endGame);
     setHand();
-    doOpponentTurn();
-    setPlayedCards();
-    completeRound(endGame);
+    if (!playerTurn) {
+        while (!playerTurn) {
+            doOpponentTurn();
+            setPlayedCards();
+            completeRound(endGame);
+            if (!playerTurn)
+                console.log("Skip player turn");
+        }
+    }
+    else  {
+        console.log("Skip opponent turn");
+        setPlayedCards();
+    }
     //setPlacedCard(true);
     if (errorIndex >= 0)
         resolveHandError(errorIndex);
