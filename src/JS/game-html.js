@@ -60,6 +60,7 @@ function setHand() {
                 (cardButton) => {onPlayCard(hand[i], cardButton)}));
         }
         catch {
+            // Record index where a card does not exist yet.
             console.log("ERROR " + i);
             errorIndex = i;
             handButtons.push(null);
@@ -67,6 +68,13 @@ function setHand() {
     }
 }
 
+// NEED TO DO THE SAME FOR THE OPPONENT CARDS
+
+/**
+ * Sometimes the hand is incomplete at the time the card buttons are created.
+ * This function creates the button for a card that had not been created.
+ * @param {number} index Index of card with an error.
+ */
 function resolveHandError(index) {
     console.log("Resolve hand error");
     handButtons[index] = createCardButtonHTML(playerHandSec, hand[index],

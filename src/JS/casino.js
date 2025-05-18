@@ -1,7 +1,7 @@
 
 
 /**
- * 
+ * Creates interactable card.
  * @param {Node} parent 
  * @param {Card} card 
  * @param {function(HTMLButtonElement)} onClick
@@ -18,6 +18,11 @@ function createCardButtonHTML(parent, card, onClick) {
     return cardButton;
 }
 
+/**
+ * Creates non-interactable card.
+ * @param {Node} parent 
+ * @param {Card} card 
+ */
 function createCardImageHTML(parent, card) {
     parent.innerHTML += `
         <image class="card" src="../Cards/${getCardImage(card)}.png" alt="${card.value} of ${card.suit}">
@@ -25,7 +30,7 @@ function createCardImageHTML(parent, card) {
 }
 
 /**
- * 
+ * Gets the appropriate image for the given card.
  * @param {Card} card 
  * @returns {string} image name
  */

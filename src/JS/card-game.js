@@ -1,23 +1,44 @@
+/**@type {Card[]} */
 let deck = [];
+/**@type {Card[]} */
 let hand = [];
+/**@type {Card[]} */
 let oppHand = [];
+/**Cards that may be picked up @type {Card[]} */
 let freeCards = [];
+/**Cards in the placed pile @type {Card[]} */
 let placed = [];
+/**Sequence of played cards to be shown @type {Card[]}*/
 let playedCards = [];
+/**Cards played in a sequence during a turn @type {Card[]} */
+let sequence = [];
 let playerTurn = true;
 //let playedJoker = false;
 let playedPicture = false;
-let pass = 0; // at 2, the game is a draw
+/**Number of rounds passed consecutively.
+ * At 2, the game is a draw.
+ */
+let pass = 0;
+/**@type {GameState} */
 let gameState;
 
-/**
- * Solution to enum in JavaScript using object literals.
- */
+/**The currently active card special. @type {CardSpecial} */
+let cardSpecial;
+
+// Solution to enum in JavaScript using object literals.
 const GameState = Object.freeze({
     PLAY: "play",
     WIN: "win",
     LOSE: "lose",
     DRAW: "draw"
+});
+
+const CardSpecial = Object.freeze({
+    NONE: "none",
+    JACK: "jack",
+    QUEEN: "queen",
+    KING: "king",
+    JOKER: "joker"
 });
 
 /**
@@ -143,6 +164,23 @@ function completeRound(endGameCallback=null) {
     if (playedCards.length == 0) {
         passRound();
         passed = true;
+    } 
+    else {
+        switch (getTopCard().value) {
+            case 'J':
+                cardSpecial = CardSpecial.JACK;
+                break;
+            case 'Q':
+                cardSpecial = CardSpecial.QUEEN;
+                break;
+            case 'K':
+                cardSpecial = CardSpecial.KING;
+                break;
+            default:
+                cardSpecial = CardSpecial.NONE;
+                break;
+        }
+        console.log(`Special: ${cardSpecial}`);
     }
     drawCards(hand);
     drawCards(oppHand);
@@ -218,6 +256,7 @@ function setUp()
     playedPicture = false;
     pass = 0;
     gameState = GameState.PLAY;
+    cardSpecial = CardSpecial.NONE;
 
     createCards();
     shuffleDeck();
