@@ -76,7 +76,8 @@ function shuffleDeck() {
 function drawCards(toHand) {
     if (deck.length <= 7) {
         deck = placed.slice(0, placed.length-2);
-        placed = [getTopCard()];
+        let c = placed[placed.length-1];
+        placed = [c];
         shuffleDeck();
     }
 
@@ -130,7 +131,7 @@ function doSpecial() {
 
 function passRound() {
     pass ++;
-    console.log(`PASS ROUND, player: ${playerTurn}`);
+    console.log(`PASS ROUND (${playerTurn ? "player" : "computer"})`);
     if (getTopCard().isJoker)
         gameState = playerTurn ? GameState.LOSE : GameState.WIN;
     else if (pass == 2)
@@ -138,11 +139,16 @@ function passRound() {
 }
 
 function completeRound(endGameCallback=null) {
-    if (playedCards.length == 0)
+    let passed = false;
+    if (playedCards.length == 0) {
         passRound();
+        passed = true;
+    }
     drawCards(hand);
     drawCards(oppHand);
-    playedCards = [];
+    if (!passed) {
+        playedCards = [];
+    }
     playedPicture = false;
 
     if (endGameCallback != null) {
@@ -202,6 +208,7 @@ function isValidByIndex(index) {
 
 function setUp()
 {
+    let firstCard;
     deck = [];
     hand = [];
     oppHand = [];
@@ -217,7 +224,9 @@ function setUp()
 
     drawCards(hand);
     drawCards(oppHand);
-    placed.push(deck.pop());
+    firstCard = deck.pop();
+    placed.push(firstCard);
+    playedCards.push(firstCard);
     deck.push(new Card(0, "none", true));
     deck.push(Card(0, "none", true));
     shuffleDeck();

@@ -6,7 +6,6 @@ let betWarning = document.getElementById("bet-warning");
 let handButtons = [];
 let freeCardButtons = [];
 let playerHandSec = document.getElementById("hand");
-let placedCardSec = document.getElementById("placed-card");
 let playedCardsSec = document.getElementById("played-cards");
 let opponentHandSec = document.getElementById("opponent-hand");
 let finishTurnButton = document.getElementById("finished-button");
@@ -16,13 +15,16 @@ let betweenGameScreen = document.getElementById("between-game");
 
 let resultP = document.getElementById("result");
 
+let errorIndex = -1;
+
 function startGame() {
     gameScreen.hidden = false;
     betScreen.hidden = true;
     betweenGameScreen.hidden = true;
     setUp();
     setHand();
-    setPlacedCard();
+    //setPlacedCard();
+    setPlayedCards();
     disableInvalidCards();
     showOpponentHand();
 }
@@ -51,36 +53,43 @@ function endGame(gameState) {
 function setHand() {
     playerHandSec.innerHTML = "";
     handButtons = [];
+    errorIndex = -1;
     for (let i = 0; i < 7; i ++) {
         try {
             handButtons.push(createCardButtonHTML(playerHandSec, hand[i], 
                 (cardButton) => {onPlayCard(hand[i], cardButton)}));
         }
         catch {
-            console.log("ERROR");
-            console.log(hand);
-            printHand(hand);
+            console.log("ERROR " + i);
+            errorIndex = i;
+            handButtons.push(null);
         }
     }
 }
 
-function setPlacedCard(opponentTurn = false) {
-    placedCardSec.innerHTML = "";
-    createCardImageHTML(placedCardSec, getTopCard());
-
-    // placedCardSec.innerHTML = getTopCard().string();
-    // if (opponentTurn)
-    //     placedCardP.innerHTML = "Computer placed: " + placedCardP.innerHTML;
+function resolveHandError(index) {
+    console.log("Resolve hand error");
+    handButtons[index] = createCardButtonHTML(playerHandSec, hand[index],
+        (cardButton) => {onPlayCard(hand[index], cardButton)});
+    console.log(hand);
+    console.log(handButtons);
 }
 
+// function setPlacedCard(opponentTurn = false) {
+//     placedCardSec.innerHTML = "";
+//     createCardImageHTML(placedCardSec, getTopCard());
+
+//     // placedCardSec.innerHTML = getTopCard().string();
+//     // if (opponentTurn)
+//     //     placedCardP.innerHTML = "Computer placed: " + placedCardP.innerHTML;
+// }
+
 function setPlayedCards() {
-    if (playedCards.length > 1) {
-        for (let i = 0; i < playedCards.length - 2; i++)
+    playedCardsSec.innerHTML = "";
+    if (playedCards.length > 0) {
+        for (let i = 0; i < playedCards.length; i++) {
             createCardImageHTML(playedCardsSec, playedCards[i]);
-        createCardImageHTML(playedCardsSec, playedCards[playedCards.length-2]);
-    }
-    else {
-        playedCardsSec.hidden = true;
+        }
     }
 
     // if (playedCards.length > 1) {
@@ -132,11 +141,11 @@ function disableInvalidCards() {
  * @param {Node} cardNode
  */
 function onPlayCard(card, cardNode) {
-    console.log(`Play ${card.value} of ${card.suit}.`);
     // DO I NEED THIS FUNCTION TO DIFFERENTIATE HANDS?
     if (playCard(card, hand)) {
         cardNode.hidden = true;
-        setPlacedCard();
+        //setPlacedCard();
+        setPlayedCards();
         if (disableInvalidCards() == 0)
             finishTurnButton.classList.add("highlighted");
         else 
@@ -161,6 +170,11 @@ betInput.addEventListener("change", () => {
         betWarning.hidden = true;
 });
 
+document.getElementById("play-button").addEventListener("click", () => {
+    betweenGameScreen.hidden = true;
+    betScreen.hidden = false;
+});
+
 // document.getElementById("play-button").addEventListener("click", () => {
 //     startGame();
 // });
@@ -183,16 +197,15 @@ betInput.addEventListener("change", () => {
 // }
 
 finishTurnButton.addEventListener("click", () => {
+    console.log("//");
     completeRound(endGame);
     setHand();
-    console.log("\n\n");
-    printHand(hand);
-    console.log(`Deck size: ${deck.length}`);
-    console.log(`Opponent hand size: ${oppHand.length}`);
     doOpponentTurn();
     setPlayedCards();
     completeRound(endGame);
-    setPlacedCard(true);
+    //setPlacedCard(true);
+    if (errorIndex >= 0)
+        resolveHandError(errorIndex);
     disableInvalidCards();
     showOpponentHand();
 });
