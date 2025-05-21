@@ -24,9 +24,10 @@ function createCardButtonHTML(parent, card, onClick) {
  * @param {Card} card 
  */
 function createCardImageHTML(parent, card) {
-    parent.innerHTML += `
-        <image class="card" src="../Cards/${getCardImage(card)}.png" alt="${card.value} of ${card.suit}">
-    `;
+    if (card != null)
+        parent.innerHTML += `
+            <image class="card" src="../Cards/${getCardImage(card)}.png" alt="${card.value} of ${card.suit}">
+        `;
 }
 
 /**

@@ -1,8 +1,8 @@
 /**@type {Card[]} */
 let deck = [];
-/**@type {Card[]} */
+/**Player hand @type {Card[]} */
 let hand = [];
-/**@type {Card[]} */
+/**Opponent hand @type {Card[]} */
 let oppHand = [];
 /**Cards that may be picked up @type {Card[]} */
 let freeCards = [];
@@ -132,41 +132,12 @@ function playCard(card, fromHand) {
         }
         placed.push(card);
         playedCards.push(card); 
+        sequence.push(card);
         fromHand[fromHand.indexOf(card)] = null;
         if (card.value == 'K' || card.value == 'Q' || card.value == 'J') {
             playedPicture = true;
         }
-        pass = 0;
-        return true;
-    }
-    return false;
-}
-
-function playCardByIndex(index) {
-    return playCard(hand[index], hand);
-}
-
-function doSpecial() {
-
-}
-
-function passRound() {
-    pass ++;
-    if (getTopCard().isJoker) 
-        gameState = playerTurn ? GameState.LOSE : GameState.WIN;
-    else if (pass == 2)
-        gameState = GameState.DRAW;
-}
-
-function completeRound(endGameCallback=null) {
-    let passed = false;
-    if (playedCards.length == 0) {
-        cardSpecial = CardSpecial.NONE;
-        passRound();
-        passed = true;
-    } 
-    else {
-        switch (getTopCard().value) {
+        switch (card.value) {
             case 'J':
                 cardSpecial = CardSpecial.JACK;
                 break;
@@ -181,7 +152,61 @@ function completeRound(endGameCallback=null) {
                 break;
         }
         console.log(`Special: ${cardSpecial}`);
+        pass = 0;
+        return true;
     }
+    return false;
+}
+
+function playCardByIndex(index) {
+    return playCard(hand[index], hand);
+}
+
+function passRound() {
+    pass ++;
+    if (getTopCard().isJoker) 
+        gameState = playerTurn ? GameState.LOSE : GameState.WIN;
+    else if (pass == 2)
+        gameState = GameState.DRAW;
+}
+
+/**
+ * 
+ * @returns {boolean} Whether successful. 
+ */
+function resolveCardExchange() {
+    if (playerTurn) {
+        if (hand.length < 7)
+            return false;
+        else {
+            for (let i = 0; i < freeCards.length; i++ )
+                oppHand.push(freeCards.pop());
+            return true;
+        }
+    }
+    else {
+        if (oppHand.length < 7)
+            return false;
+        else {
+            for (let i = 0; i < freeCards.length; i ++)
+                hand.push(freeCards.pop());
+            return true;
+        }
+    }
+}
+
+/**
+ * 
+ * @param {function} endGameCallback 
+ */
+function completeRound(endGameCallback=null) {
+    let passed = false;
+    sequence = [];
+    if (playedCards.length == 0) {
+        cardSpecial = CardSpecial.NONE;
+        passRound();
+        passed = true;
+    } 
     drawCards(hand);
     drawCards(oppHand);
     if (!passed) {
@@ -297,3 +322,20 @@ function getTopCard() {
     return placed[placed.length-1]
 }
 
+function drawFreeCards(number, fromHand, toHand) {
+    console.log("Draw free cards");
+    console.log("From hand:");
+    console.log(fromHand);
+    let randI = 0;
+    freeCards = [];
+    drawCards(toHand);
+    for (let i = 0; i < number; i ++) {
+        randI = Math.floor(Math.random() * fromHand.length);
+        console.log(`Draw from index ${randI}`);
+        console.log("Card: ");
+        console.log(fromHand[randI]);
+        freeCards.push(fromHand[randI]);
+        fromHand.splice(randI, 1);
+    }
+    console.log(freeCards);
+}

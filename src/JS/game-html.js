@@ -8,9 +8,9 @@ let freeCardButtons = [];
 let playerHandSec = document.getElementById("hand");
 let playedCardsSec = document.getElementById("played-cards");
 let opponentHandSec = document.getElementById("opponent-hand");
+let freeCardsSec = document.getElementById("free-cards");
 let finishTurnButton = document.getElementById("finished-button");
 
-// PROBABLY DON'T NEED THIS
 let betweenGameScreen = document.getElementById("between-game");
 
 let resultP = document.getElementById("result");
@@ -63,7 +63,7 @@ function setHand() {
     playerHandSec.innerHTML = "";
     handButtons = [];
     errorIndex = -1;
-    for (let i = 0; i < 7; i ++) {
+    for (let i = 0; i < hand.length; i ++) {
         try {
             handButtons.push(createCardButtonHTML(playerHandSec, hand[i], 
                 (cardButton) => {onPlayCard(hand[i], cardButton)}));
@@ -77,7 +77,19 @@ function setHand() {
     }
 }
 
-// NEED TO DO THE SAME FOR THE OPPONENT CARDS
+function setFreeCards() {
+    freeCardsSec.innerHTML = "";
+    freeCardButtons = [];
+    console.log("Set free cards.");
+    for (let c of freeCards) {
+        console.log(c);
+        freeCardButtons.push(createCardButtonHTML(freeCardsSec, c,
+            (cardButton) => {onSelectFreeCard(c, cardButton)}));
+        console.log(freeCardButtons[freeCardButtons.length-1]);
+    }
+}
+
+// NEED TO DO THE SAME FOR THE OPPONENT CARDS ?
 
 /**
  * Sometimes the hand is incomplete at the time the card buttons are created.
@@ -92,15 +104,6 @@ function resolveHandError(index) {
     console.log(handButtons);
 }
 
-// function setPlacedCard(opponentTurn = false) {
-//     placedCardSec.innerHTML = "";
-//     createCardImageHTML(placedCardSec, getTopCard());
-
-//     // placedCardSec.innerHTML = getTopCard().string();
-//     // if (opponentTurn)
-//     //     placedCardP.innerHTML = "Computer placed: " + placedCardP.innerHTML;
-// }
-
 function setPlayedCards() {
     playedCardsSec.innerHTML = "";
     if (playedCards.length > 0) {
@@ -108,17 +111,6 @@ function setPlayedCards() {
             createCardImageHTML(playedCardsSec, playedCards[i]);
         }
     }
-
-    // if (playedCards.length > 1) {
-    //     let s = "Played in sequence: (";
-    //     for (let i = 0; i < playedCards.length - 2; i ++)
-    //         s += `${playedCards[i].string()}, `;
-    //     s += `${playedCards[playedCards.length-2].string()})`;
-    //     playedCardsP.innerHTML = s;
-    // }
-    // else {
-    //     playedCardsP.hidden = true;
-    // }
 }
 
 function showOpponentHand() {
@@ -126,13 +118,6 @@ function showOpponentHand() {
     for (let c of oppHand)
         createCardImageHTML(opponentHandSec, c);
     opponentHandSec.hidden = false;
-
-    // let s =  ""
-    // for (let c of oppHand) {
-    //     s += `${c.string()} `;
-    // }
-    // opponentHandP.hidden = false;
-    // opponentHandP.innerHTML = s;
 }
 
 /**
@@ -158,19 +143,43 @@ function disableInvalidCards() {
  * @param {Node} cardNode
  */
 function onPlayCard(card, cardNode) {
-    // DO I NEED THIS FUNCTION TO DIFFERENTIATE HANDS?
-    if (playCard(card, hand)) {
-        cardNode.hidden = true;
-        //setPlacedCard();
-        setPlayedCards();
-        if (disableInvalidCards() == 0)
-            finishTurnButton.classList.add("highlighted");
-        else 
-            finishTurnButton.classList.remove("highlighted");
-    } 
-    else {
-        alert("You cannot play that card.");
+    if (cardSpecial == CardSpecial.KING) {
+        freeCards.push(card);
+        hand.splice(hand.indexOf(card), 1);
+        setHand();
+        setFreeCards();
+        showOpponentHand();
     }
+    else {
+        if (playCard(card, hand)) {
+            cardNode.hidden = true;
+            setPlayedCards();
+            if (disableInvalidCards() == 0)
+                finishTurnButton.classList.add("highlighted");
+            else 
+                finishTurnButton.classList.remove("highlighted");
+    
+            if (card.value == "K") {
+                drawFreeCards(sequence.length, oppHand, hand);
+                setFreeCards();
+                setHand();
+                showOpponentHand();
+            }
+        } 
+        else {
+            alert("You cannot play that card.");
+        }
+    }
+}
+
+/**
+ * 
+ * @param {Card} card 
+ * @param {Node} cardNode 
+ */
+function onSelectFreeCard(card, cardNode) {
+    console.log("SELECT FREE CARD");
+    console.log(card);
 }
 
 document.getElementById("place-bet").addEventListener("click", () => {
@@ -196,48 +205,39 @@ document.getElementById("play-button").addEventListener("click", () => {
     betScreen.hidden = false;
 });
 
-// document.getElementById("play-button").addEventListener("click", () => {
-//     startGame();
-// });
-
-// // THIS IS WHAT ISN'T WORKING
-// // INSTEAD USE onPlayCard()
-// for (let i = 0; i < 7; i ++) {
-//     handButtons[i].addEventListener("click", () => {
-//         if (playCardByIndex(i)) {
-//             handButtons[i].hidden = true;
-//             setPlacedCard();
-//             if (disableInvalidCards() == 0)
-//                 finishTurnButton.classList.add("highlighted");
-//             else 
-//                 finishTurnButton.classList.remove("highlighted");
-//         } else {
-//             alert("You cannot play that card.");
-//         }
-//     });
-// }
-
 finishTurnButton.addEventListener("click", () => {
-    console.log("//");
-    completeRound(endGame);
-    setHand();
-    if (!playerTurn) {
-        while (!playerTurn) {
-            doOpponentTurn();
-            setPlayedCards();
-            completeRound(endGame);
-            if (!playerTurn)
-                console.log("Skip player turn");
+    let continueToFinish = true;
+    if (cardSpecial == CardSpecial.KING) {
+        if (resolveCardExchange())
+            continueToFinish = true;
+        else  {
+            console.log("Card exchange unresolved");
+            continueToFinish = false;
         }
     }
-    else  {
-        console.log("Skip opponent turn");
-        setPlayedCards();
+    if (continueToFinish) {
+        console.log("//");
+        completeRound(endGame);
+        setHand();
+        if (!playerTurn) {
+            while (!playerTurn) {
+                doOpponentTurn();
+                showOpponentHand();
+                setPlayedCards();
+                completeRound(endGame);
+                if (!playerTurn)
+                    console.log("Skip player turn");
+            }
+        }
+        else  {
+            console.log("Skip opponent turn");
+            setPlayedCards();
+        }
+        //setPlacedCard(true);
+        if (errorIndex >= 0)
+            resolveHandError(errorIndex);
+        disableInvalidCards();
+        showOpponentHand();
     }
-    //setPlacedCard(true);
-    if (errorIndex >= 0)
-        resolveHandError(errorIndex);
-    disableInvalidCards();
-    showOpponentHand();
 });
 
