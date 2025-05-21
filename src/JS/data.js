@@ -127,6 +127,15 @@ function updateUserEmail(username, newEmail) {
     return newUser;
 }
 
+/**
+ * 
+ * @param {number} amount 
+ */
+function addBalance(amount) {
+    let balance = parseInt(localStorage.getItem(KEY_BALANCE));
+    localStorage.setItem(KEY_BALANCE, balance + amount);
+}
+
 function setPurchased(productName) {
     let purchases = localStorage.getItem(KEY_PURCHASES);
     let purchaseMap;

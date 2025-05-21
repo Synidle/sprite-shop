@@ -36,16 +36,25 @@ function startGame() {
 function endGame(gameState) {
     gameScreen.hidden = true;
     betweenGameScreen.hidden = false;
+
+    console.log(`END GAME ${gameState}`);
     
     switch(gameState) {
         case GameState.DRAW:
             resultP.innerHTML = "DRAW";
+            addBalance(bet);
+            updateBalanceHeader();
             break;
         case GameState.LOSE:
             resultP.innerHTML = "COMPUTER WIN";
             break;
         case GameState.WIN:
             resultP.innerHTML = "PLAYER WIN";
+            addBalance(bet * 2);
+            updateBalanceHeader();
+            break;
+        default:
+            console.log("NO DEFINED END STATE");
             break;
     }
 }
@@ -166,16 +175,20 @@ function onPlayCard(card, cardNode) {
 
 document.getElementById("place-bet").addEventListener("click", () => {
     bet = parseInt(betInput.value);
-    if (bet <= parseInt(localStorage.getItem(KEY_BALANCE)))
+    if (bet <= parseInt(localStorage.getItem(KEY_BALANCE))) {
+        addBalance(-bet);
+        updateBalanceHeader();
         startGame();
+    }
 });
 
 betInput.addEventListener("change", () => {
     bet = parseInt(betInput.value);
     if (bet > parseInt(localStorage.getItem(KEY_BALANCE)))
         betWarning.hidden = false;
-    else
+    else {
         betWarning.hidden = true;
+    }
 });
 
 document.getElementById("play-button").addEventListener("click", () => {

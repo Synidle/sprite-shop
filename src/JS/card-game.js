@@ -152,8 +152,7 @@ function doSpecial() {
 
 function passRound() {
     pass ++;
-    console.log(`PASS ROUND (${playerTurn ? "player" : "computer"})`);
-    if (getTopCard().isJoker)
+    if (getTopCard().isJoker) 
         gameState = playerTurn ? GameState.LOSE : GameState.WIN;
     else if (pass == 2)
         gameState = GameState.DRAW;
@@ -162,6 +161,7 @@ function passRound() {
 function completeRound(endGameCallback=null) {
     let passed = false;
     if (playedCards.length == 0) {
+        cardSpecial = CardSpecial.NONE;
         passRound();
         passed = true;
     } 
@@ -191,6 +191,7 @@ function completeRound(endGameCallback=null) {
 
     if (endGameCallback != null) {
         if (gameState != GameState.PLAY) {
+            playerTurn = true; // fixes endless repetition
             endGameCallback(gameState);
         } else {switchTurn();}
     } else {switchTurn();}
