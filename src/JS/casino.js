@@ -23,10 +23,11 @@ function createCardButtonHTML(parent, card, onClick) {
  * @param {Node} parent 
  * @param {Card} card 
  */
-function createCardImageHTML(parent, card) {
+function createCardImageHTML(parent, card, reverse=false) {
+    let cardImage = reverse ? "back" : getCardImage(card);
     if (card != null)
         parent.innerHTML += `
-            <image class="card" src="../Cards/${getCardImage(card)}.png" alt="${card.value} of ${card.suit}">
+            <image class="card" src="../Cards/${cardImage}.png" alt="${card.value} of ${card.suit}">
         `;
 }
 

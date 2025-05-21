@@ -1,10 +1,13 @@
 let bet = 0;
+/**Used to display updates on game. */
+let notification = document.getElementById("notification");
 let gameScreen = document.getElementById("game");
 let betScreen = document.getElementById("bet");
 let betInput = document.getElementById("bet-input");
 let betWarning = document.getElementById("bet-warning");
 let handButtons = [];
 let freeCardButtons = [];
+let freeCardsWarning = document.getElementById("free-cards-warning");
 let playerHandSec = document.getElementById("hand");
 let playedCardsSec = document.getElementById("played-cards");
 let opponentHandSec = document.getElementById("opponent-hand");
@@ -80,12 +83,10 @@ function setHand() {
 function setFreeCards() {
     freeCardsSec.innerHTML = "";
     freeCardButtons = [];
-    console.log("Set free cards.");
     for (let c of freeCards) {
         console.log(c);
         freeCardButtons.push(createCardButtonHTML(freeCardsSec, c,
             (cardButton) => {onSelectFreeCard(c, cardButton)}));
-        console.log(freeCardButtons[freeCardButtons.length-1]);
     }
 }
 
@@ -116,7 +117,7 @@ function setPlayedCards() {
 function showOpponentHand() {
     opponentHandSec.innerHTML = "";
     for (let c of oppHand)
-        createCardImageHTML(opponentHandSec, c);
+        createCardImageHTML(opponentHandSec, c, {reverse:true});
     opponentHandSec.hidden = false;
 }
 
@@ -160,6 +161,7 @@ function onPlayCard(card, cardNode) {
                 finishTurnButton.classList.remove("highlighted");
     
             if (card.value == "K") {
+                notification.innerHTML = "Exchange cards.";
                 drawFreeCards(sequence.length, oppHand, hand);
                 setFreeCards();
                 setHand();
@@ -178,8 +180,10 @@ function onPlayCard(card, cardNode) {
  * @param {Node} cardNode 
  */
 function onSelectFreeCard(card, cardNode) {
-    console.log("SELECT FREE CARD");
-    console.log(card);
+    hand.push(card);
+    freeCards.splice(freeCards.indexOf(card), 1);
+    setHand();
+    setFreeCards();
 }
 
 document.getElementById("place-bet").addEventListener("click", () => {
@@ -207,11 +211,15 @@ document.getElementById("play-button").addEventListener("click", () => {
 
 finishTurnButton.addEventListener("click", () => {
     let continueToFinish = true;
+    notification.innerHTML = "";
     if (cardSpecial == CardSpecial.KING) {
-        if (resolveCardExchange())
+        if (resolveCardExchange()) {
+            freeCardsWarning.hidden = true;
             continueToFinish = true;
+        }
         else  {
             console.log("Card exchange unresolved");
+            freeCardsWarning.hidden = false;
             continueToFinish = false;
         }
     }
@@ -225,12 +233,15 @@ finishTurnButton.addEventListener("click", () => {
                 showOpponentHand();
                 setPlayedCards();
                 completeRound(endGame);
-                if (!playerTurn)
+                if (!playerTurn) {
                     console.log("Skip player turn");
+                    notification.innerHTML = "Skipped player's turn.";
+                }
             }
         }
         else  {
             console.log("Skip opponent turn");
+            notification.innerHTML = "Skipped opponent's turn."
             setPlayedCards();
         }
         //setPlacedCard(true);

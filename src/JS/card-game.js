@@ -176,7 +176,7 @@ function passRound() {
  */
 function resolveCardExchange() {
     if (playerTurn) {
-        if (hand.length < 7)
+        if (hand.length != 7)
             return false;
         else {
             for (let i = 0; i < freeCards.length; i++ )
@@ -185,7 +185,7 @@ function resolveCardExchange() {
         }
     }
     else {
-        if (oppHand.length < 7)
+        if (oppHand.length != 7)
             return false;
         else {
             for (let i = 0; i < freeCards.length; i ++)
@@ -323,19 +323,12 @@ function getTopCard() {
 }
 
 function drawFreeCards(number, fromHand, toHand) {
-    console.log("Draw free cards");
-    console.log("From hand:");
-    console.log(fromHand);
     let randI = 0;
     freeCards = [];
     drawCards(toHand);
     for (let i = 0; i < number; i ++) {
         randI = Math.floor(Math.random() * fromHand.length);
-        console.log(`Draw from index ${randI}`);
-        console.log("Card: ");
-        console.log(fromHand[randI]);
         freeCards.push(fromHand[randI]);
         fromHand.splice(randI, 1);
     }
-    console.log(freeCards);
 }

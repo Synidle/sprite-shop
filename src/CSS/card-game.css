@@ -1,3 +1,7 @@
+#free-cards {
+    background-color: var(--secondary-colour1);
+}
+
 .card img {
     height:100%;
     image-rendering: pixelated;
