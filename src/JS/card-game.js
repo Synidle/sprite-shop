@@ -227,6 +227,10 @@ function switchTurn() {
         playerTurn = !playerTurn;
 }
 
+/**
+ * 
+ * @returns {Card} Opponent's last played card.
+ */
 function doOpponentTurn() {
     // let a = false; // tracks whether played a card
     // for (let c of oppHand) {
@@ -235,9 +239,13 @@ function doOpponentTurn() {
     // }
     // if (!a) {passRound();}
     // else {drawCards(oppHand);}
+    let lastPlayedCard = undefined;
     for (let c of oppHand) {
-        playCard(c, oppHand);
+        if (playCard(c, oppHand))
+            lastPlayedCard = c;
     }
+
+    return lastPlayedCard;
     //drawCards(oppHand);
 }
 
@@ -331,4 +339,33 @@ function drawFreeCards(number, fromHand, toHand) {
         freeCards.push(fromHand[randI]);
         fromHand.splice(randI, 1);
     }
+}
+
+function opponentExchangeCards(number) {
+    drawFreeCards(number, hand, oppHand);
+    console.log("OPPONENT EXCHANGE CARDS");
+    console.log("Opp hand");
+    console.log(oppHand);
+    console.log("Player hand");
+    console.log(hand);
+    for (let i = 0; i < freeCards.length; i ++) {
+        let c = freeCards[i];
+        if (c.isJoker || c.value == 'K' || c.value == 'Q' || c.value == 'J') {
+            for (let j = 0; j < oppHand.length; j ++) {
+                let d = oppHand[j];
+                if (!d.isJoker && d.value != 'K' && d.value != 'Q' && d.value != 'J') {
+                    // Exchange cards
+                    oppHand[j] = c;
+                    freeCards[i] = d;
+                }
+            }
+        }
+    }
+    console.log("EXCHANGE");
+    console.log("Opp hand");
+    console.log(oppHand);
+    console.log("Player hand");
+    console.log(hand);
+
+    cardSpecial = CardSpecial.NONE;
 }

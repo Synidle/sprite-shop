@@ -84,7 +84,6 @@ function setFreeCards() {
     freeCardsSec.innerHTML = "";
     freeCardButtons = [];
     for (let c of freeCards) {
-        console.log(c);
         freeCardButtons.push(createCardButtonHTML(freeCardsSec, c,
             (cardButton) => {onSelectFreeCard(c, cardButton)}));
     }
@@ -101,8 +100,6 @@ function resolveHandError(index) {
     console.log("Resolve hand error");
     handButtons[index] = createCardButtonHTML(playerHandSec, hand[index],
         (cardButton) => {onPlayCard(hand[index], cardButton)});
-    console.log(hand);
-    console.log(handButtons);
 }
 
 function setPlayedCards() {
@@ -150,6 +147,10 @@ function onPlayCard(card, cardNode) {
         setHand();
         setFreeCards();
         showOpponentHand();
+
+        if (hand.length != 7)
+            displayFreeCardsWarning();
+        else {freeCardsWarning.hidden = true;}
     }
     else {
         if (playCard(card, hand)) {
@@ -184,6 +185,20 @@ function onSelectFreeCard(card, cardNode) {
     freeCards.splice(freeCards.indexOf(card), 1);
     setHand();
     setFreeCards();
+
+    if (hand.length != 7)
+        displayFreeCardsWarning();
+    else {freeCardsWarning.hidden = true;}
+}
+
+function displayFreeCardsWarning() {
+    console.log("Card exchange unresolved");
+    console.log(hand.length);
+    freeCardsWarning.hidden = false;
+    freeCardsWarning.innerHTML = "Card exchange unresolved. "
+    freeCardsWarning.innerHTML += hand.length > 7 ?
+        `You must get rid of ${hand.length-7} more card(s).` :
+        `You must take ${7-hand.length} more card(s).`;
 }
 
 document.getElementById("place-bet").addEventListener("click", () => {
@@ -215,11 +230,12 @@ finishTurnButton.addEventListener("click", () => {
     if (cardSpecial == CardSpecial.KING) {
         if (resolveCardExchange()) {
             freeCardsWarning.hidden = true;
+            freeCards = [];
+            setFreeCards();
             continueToFinish = true;
         }
         else  {
-            console.log("Card exchange unresolved");
-            freeCardsWarning.hidden = false;
+            displayFreeCardsWarning();
             continueToFinish = false;
         }
     }
@@ -229,13 +245,19 @@ finishTurnButton.addEventListener("click", () => {
         setHand();
         if (!playerTurn) {
             while (!playerTurn) {
-                doOpponentTurn();
+                let oppLastPlayedCard = doOpponentTurn();
                 showOpponentHand();
                 setPlayedCards();
                 completeRound(endGame);
                 if (!playerTurn) {
                     console.log("Skip player turn");
                     notification.innerHTML = "Skipped player's turn.";
+                }
+                else if (oppLastPlayedCard != undefined) {
+                    if (oppLastPlayedCard.value == 'K') {
+                        notification.innerHTML = "Opponent has opportunity to exchange some cards with the player."
+                        opponentExchangeCards(sequence.length);
+                    }
                 }
             }
         }
