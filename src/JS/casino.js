@@ -9,8 +9,10 @@ let rulesetDropdown = document.getElementById("ruleset-dropdown");
  */
 function createCardButtonHTML(parent, card, onClick) {
     let cardButton = document.createElement("button");
+    let cardImage = getCardImage(card);
+    if (cardImage == null) { return null; }
     cardButton.innerHTML = `
-        <image src="../Cards/${getCardImage(card)}.png" alt="${card.value} of ${card.suit}">
+        <image src="../Cards/${cardImage}.png" alt="${card.value} of ${card.suit}">
     `;
     cardButton.addEventListener("click", () => onClick(cardButton));
     cardButton.classList.add("card");
@@ -25,6 +27,7 @@ function createCardButtonHTML(parent, card, onClick) {
  */
 function createCardImageHTML(parent, card, reverse=false) {
     let cardImage = reverse ? "back" : getCardImage(card);
+    if (cardImage == null) { cardImage = "back"; }
     if (card != null)
         parent.innerHTML += `
             <image class="card" src="../Cards/${cardImage}.png" alt="${card.value} of ${card.suit}">
@@ -37,6 +40,7 @@ function createCardImageHTML(parent, card, reverse=false) {
  * @returns {string} image name
  */
 function getCardImage(card) {
+    if (card == null || card == undefined) { return null; }
     if (card.isJoker)
         return "joker-red";
     else
