@@ -78,6 +78,15 @@ button:hover:disabled {
     display:none;
 }
 
+.centre-underline-heading {
+    text-align: center;
+    text-decoration: underline;
+}
+
+.small-heading {
+    font-size: 1em;
+}
+
 .hidden {
     display:none;
 }
