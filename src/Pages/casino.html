@@ -18,32 +18,33 @@
         </header>
         <main>
             <section id="bet">
+                <h1>Card Game: Court Jester</h1>
                 <label for="bet-input">Bet: £</label>
                 <input id="bet-input" type="number" min="0">
                 <button id="place-bet">Play</button>
                 <p class="warning" id="bet-warning" hidden>Insufficient balance to make bet.</p>
             </section>
             <section id="game" hidden>
-                <!-- Should have relevant sections and labels
-                 for accessibility -->
-                <label for="opponent-hand">Opponent Hand</label>
-                <section id="opponent-hand"></section>
-                <label for="played-cards">Played Cards</label>
-                <section id="played-cards"></section>
-                <label for="free-cards">Free Cards</label>
-                <section id="free-cards"></section>
+                <h2>Game</h2>
+                <!-- <label for="opponent-hand">Opponent Hand</label> -->
+                <section><h3>Opponent hand</h3><div id="opponent-hand"></div></section>
+                <!-- <label for="played-cards">Played Cards</label> -->
+                <section><h3>Played cards</h3><div id="played-cards"></div></section>
+                <!-- <label for="free-cards">Free Cards</label> -->
+                <section><h3>Free cards</h3><div id="free-cards"></div></section>
                 <p id="free-cards-warning" class="warning" hidden>You must have 7 cards in your hand.</p>
                 <p id="notification" class="warning"></p>
-                <label for="hand">Hand</label>
-                <section id="hand"></section>
+                <!-- <label for="hand">Hand</label> -->
+                <section><h3>Hand</h3><div id="hand"></div></section>
                 <button id="finished-button"><i class="fa-solid fa-arrow-right"></i></button>
             </section>
             <section id="between-game" hidden>
+                <h2>Result</h2>
                 <p id="result">You win!</p>
                 <button id="play-button">Play again</button>
             </section>
             <section id="game-rules">
-                <button id="ruleset-dropdown" class="text-button drop-down-contained"><h1>How to play Court Jester <i class="fa-solid fa-caret-right"></i><i class="fa-solid fa-caret-down"></i></h1></button>
+                <h1><button id="ruleset-dropdown" class="text-button drop-down-contained">How to play Court Jester <i class="fa-solid fa-caret-right"></i><i class="fa-solid fa-caret-down"></i></button></h1>
                 <div id="drop-down-text" class="hidden">
                     <!-- These are the abridged rules. -->
                     <p><i>Court Jester</i> is a card game for two people.</p>

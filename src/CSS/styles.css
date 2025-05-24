@@ -68,7 +68,7 @@ button:hover:disabled {
 }
 .text-button:hover {
     color:var(--accent-colour3);
-    text-decoration: underline .2em;
+    text-decoration: underline .15em;
 }
 
 .drop-down-contained i.fa-caret-down {

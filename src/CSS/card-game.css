@@ -2,6 +2,10 @@
     background-color: var(--secondary-colour1);
 }
 
+#ruleset-dropdown {
+    font-size:1em;
+}
+
 #game-rules {
     padding-top:2em;
 }
