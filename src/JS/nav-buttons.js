@@ -17,8 +17,8 @@ document.getElementById("business-button").addEventListener("click", function() 
     open("business.html", "_self");
 });
 
-document.getElementById("balance-num-val").innerHTML = 
-    localStorage.getItem(KEY_BALANCE);
+// document.getElementById("balance-num-val").innerHTML = 
+//     localStorage.getItem(KEY_BALANCE);
 
 userPfpButton.addEventListener("click", function() {
     document.getElementById("user-menu").classList.add("displayed");

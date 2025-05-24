@@ -20,6 +20,8 @@ document.querySelector("#header").innerHTML = `
     </nav>
 `;
 
+updateBalanceHeader();
+
 function updateBalanceHeader() {
     let balance = localStorage.getItem(KEY_BALANCE);
     let append;
