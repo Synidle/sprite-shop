@@ -21,6 +21,17 @@ document.querySelector("#header").innerHTML = `
 `;
 
 function updateBalanceHeader() {
+    let balance = localStorage.getItem(KEY_BALANCE);
+    let append;
+    let i = 0;
+    let mod = 3;
+    let maxMod = 12;
+    while (3 < balance.length+1 && mod <= maxMod) {
+        balance = balance.substring(0, balance.length-3);
+        mod += 3;
+        i ++;
+    }
+    append = ['', 'K', 'M', 'B', 'T'][i];
     document.getElementById("balance-num-val").innerHTML = 
-        localStorage.getItem(KEY_BALANCE);
+        balance + append;
 }
