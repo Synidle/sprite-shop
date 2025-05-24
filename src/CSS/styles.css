@@ -59,8 +59,24 @@ button:hover:disabled {
     cursor:not-allowed;
 }
 
-.fa-solid {
-    /* generic styling for icons */
+.text-button {
+    background: none;
+    border:none;
+}
+.text-button:hover {
+    color:var(--accent-colour3);
+    text-decoration: underline .2em;
+}
+
+.drop-down-contained i.fa-caret-down {
+    display:none;
+}
+.drop-down-expanded i.fa-caret-right {
+    display:none;
+}
+
+.hidden {
+    display:none;
 }
 
 /* Maybe have header elements sticky */

@@ -1,4 +1,4 @@
-
+let rulesetDropdown = document.getElementById("ruleset-dropdown");
 
 /**
  * Creates interactable card.
@@ -42,3 +42,15 @@ function getCardImage(card) {
     else
         return `${card.value.toLowerCase()}-${card.suit[0]}`;
 }
+
+rulesetDropdown.addEventListener("click", () => {
+    if (rulesetDropdown.classList.contains("drop-down-contained")) {
+        rulesetDropdown.classList.remove("drop-down-contained");
+        rulesetDropdown.classList.add("drop-down-expanded");
+        document.getElementById("drop-down-text").classList.remove("hidden");
+    } else {
+        rulesetDropdown.classList.remove("drop-down-expanded");
+        rulesetDropdown.classList.add("drop-down-contained");
+        document.getElementById("drop-down-text").classList.add("hidden");
+    }
+});

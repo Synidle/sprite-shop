@@ -2,6 +2,10 @@
     background-color: var(--secondary-colour1);
 }
 
+#game-rules {
+    padding-top:2em;
+}
+
 .card img {
     height:100%;
     image-rendering: pixelated;
