@@ -33,8 +33,7 @@ button#finished-button {
 }
 
 button.highlighted {
-    background-color: greenyellow;
-    transition: background-color ease-in .1s;
+    animation: flash-green .5s infinite alternate;
 }
 button.highlighted:hover {
     background-color: green;
@@ -42,6 +41,15 @@ button.highlighted:hover {
 
 #result {
     font-size: 2em;
+}
+
+@keyframes flash-green {
+    from {
+        background-color: green;
+    }
+    to {
+        background-color: greenyellow;
+    }
 }
 
 /* Severely narrow screen */
