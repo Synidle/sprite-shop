@@ -53,7 +53,7 @@ function endGame(gameState) {
             resultP.innerHTML = "COMPUTER WIN";
             break;
         case GameState.WIN:
-            resultP.innerHTML = "PLAYER WIN";
+            resultP.innerHTML = `PLAYER WIN: + £${bet*2}`;
             addBalance(bet * 2);
             updateBalanceHeader();
             break;
