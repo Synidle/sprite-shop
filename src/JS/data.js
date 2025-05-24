@@ -162,6 +162,10 @@ function getPurchased(productName) {
     else {return false;}
 }
 
+/**
+ * 
+ * @returns {Map<string, Product>}
+ */
 function getApparel() {
     let fromStorage = localStorage.getItem(KEY_APPAREL);
     return fromStorage == null ? 
@@ -188,6 +192,10 @@ function removeClothingItem(category) {
     wearItem(newNullProduct(category));
 }
 
+/**
+ * 
+ * @returns {Map<string, Business>}
+ */
 function getBusinesses() {
     let fromStorage = localStorage.getItem(KEY_BUSINESSES);
     return fromStorage == null ? 

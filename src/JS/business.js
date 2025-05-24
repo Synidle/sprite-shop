@@ -1,5 +1,7 @@
+/**@type {Business[]} */
 let allBusinesses = [];
 let businessList = document.querySelector("#business-list");
+let balance = parseInt(JSON.parse(localStorage.getItem(KEY_BALANCE)));
 
 /**
  * 
@@ -73,7 +75,10 @@ for (let b of allBusinesses) {
     }
     else {
         let purchaseButton = document.createElement("button");
+        purchaseButton.id = `business-button-${b.id}`;
         purchaseButton.classList.add("purchase-business");
+        if (balance < b.cost)
+            purchaseButton.disabled = true;
         purchaseButton.addEventListener("click", () => {
             if (tryBuyBusiness(b))
                 location.reload();
@@ -88,7 +93,7 @@ for (let b of allBusinesses) {
  * @param {Business} business 
  */
 function tryBuyBusiness(business) {
-    let balance = parseInt(JSON.parse(localStorage.getItem(KEY_BALANCE)));
+    balance = parseInt(JSON.parse(localStorage.getItem(KEY_BALANCE)));
     if (business.cost <= balance) {
         localStorage.setItem(KEY_BALANCE, balance-business.cost);
         addBusiness(business);
@@ -98,16 +103,24 @@ function tryBuyBusiness(business) {
 }
 
 function updateBusinesses() {
-    let balance = parseInt(JSON.parse(localStorage.getItem(KEY_BALANCE)));
-    for (let b of ownedBusinesses.values()) {
-        let progress = document.getElementById(`progress-${b.id}`);
-        if (progress != null) {
-            progress.value ++;
-            if (progress.value == progress.max) {
-                balance = balance+b.profit;
-                localStorage.setItem(KEY_BALANCE, balance);
-                updateBalanceHeader();
-                progress.value = 0;
+    balance = parseInt(JSON.parse(localStorage.getItem(KEY_BALANCE)));
+    for (let b of allBusinesses.values()) {
+        let button = document.getElementById(`business-button-${b.id}`);
+        if (button != null) {
+            if (balance >= b.cost)
+                button.disabled = false;
+            else {button.disabled = true;}
+        }
+        else {
+            let progress = document.getElementById(`progress-${b.id}`);
+            if (progress != null) {
+                progress.value ++;
+                if (progress.value == progress.max) {
+                    balance = balance+b.profit;
+                    localStorage.setItem(KEY_BALANCE, balance);
+                    updateBalanceHeader();
+                    progress.value = 0;
+                }
             }
         }
     }
