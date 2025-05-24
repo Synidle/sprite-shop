@@ -19,6 +19,7 @@ let betweenGameScreen = document.getElementById("between-game");
 let resultP = document.getElementById("result");
 
 let errorIndex = -1;
+let errorOppIndex = -1; 
 
 function startGame() {
     gameScreen.hidden = false;
@@ -89,8 +90,6 @@ function setFreeCards() {
     }
 }
 
-// NEED TO DO THE SAME FOR THE OPPONENT CARDS ?
-
 /**
  * Sometimes the hand is incomplete at the time the card buttons are created.
  * This function creates the button for a card that had not been created.
@@ -100,6 +99,11 @@ function resolveHandError(index) {
     console.log("Resolve hand error");
     handButtons[index] = createCardButtonHTML(playerHandSec, hand[index],
         (cardButton) => {onPlayCard(hand[index], cardButton)});
+}
+
+function resolveOppError(index) {
+    console.log("Resolve opponent error");
+    opponentHandSec[index] = createCardImageHTML(opponentHandSec, c, {reverse:true});
 }
 
 function setPlayedCards() {
@@ -112,9 +116,17 @@ function setPlayedCards() {
 }
 
 function showOpponentHand() {
+    errorOppIndex = -1; 
     opponentHandSec.innerHTML = "";
-    for (let c of oppHand)
-        createCardImageHTML(opponentHandSec, c, {reverse:true});
+    for (let i = 0; i < oppHand.length; i ++) {
+        try {
+            createCardImageHTML(opponentHandSec, oppHand[i], {reverse:true});
+        }
+        catch {
+            console.log("ERROR");
+            errorOppIndex = i;
+        }
+    }
     opponentHandSec.hidden = false;
 }
 
@@ -255,10 +267,13 @@ finishTurnButton.addEventListener("click", () => {
                 }
                 else if (oppLastPlayedCard != undefined) {
                     if (oppLastPlayedCard.value == 'K') {
-                        notification.innerHTML = "Opponent has opportunity to exchange some cards with the player."
-                        opponentExchangeCards(sequence.length);
+                        let n = opponentExchangeCards(oppSequence.length);
+                        notification.innerHTML = `Opponent exchanged ${n} cards with the player.`;
+                        setHand();
                     }
                 }
+                if (errorOppIndex >= 0)
+                    resolveOppError(errorIndex);
             }
         }
         else  {

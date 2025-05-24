@@ -12,6 +12,7 @@ let placed = [];
 let playedCards = [];
 /**Cards played in a sequence during a turn @type {Card[]} */
 let sequence = [];
+let oppSequence = [];
 let playerTurn = true;
 //let playedJoker = false;
 let playedPicture = false;
@@ -185,6 +186,7 @@ function resolveCardExchange() {
         }
     }
     else {
+        console.log("Opponent turn");
         if (oppHand.length != 7)
             return false;
         else {
@@ -232,6 +234,7 @@ function switchTurn() {
  * @returns {Card} Opponent's last played card.
  */
 function doOpponentTurn() {
+    oppSequence = [];
     // let a = false; // tracks whether played a card
     // for (let c of oppHand) {
     //     let b = playCard(c, oppHand);
@@ -241,8 +244,12 @@ function doOpponentTurn() {
     // else {drawCards(oppHand);}
     let lastPlayedCard = undefined;
     for (let c of oppHand) {
-        if (playCard(c, oppHand))
-            lastPlayedCard = c;
+        if (c != undefined) {
+            if (playCard(c, oppHand)) {
+                oppSequence.push(c);
+                lastPlayedCard = c;
+            }
+        }
     }
 
     return lastPlayedCard;
@@ -331,41 +338,49 @@ function getTopCard() {
 }
 
 function drawFreeCards(number, fromHand, toHand) {
+    console.log(`Draw ${number} free cards`);
     let randI = 0;
     freeCards = [];
     drawCards(toHand);
     for (let i = 0; i < number; i ++) {
         randI = Math.floor(Math.random() * fromHand.length);
         freeCards.push(fromHand[randI]);
+        console.log(fromHand[randI]);
         fromHand.splice(randI, 1);
     }
 }
 
+/**
+ * 
+ * @param {number} number Number of cards open to exchange.
+ * @returns {number} Number of cards actually exchanged.
+ */
 function opponentExchangeCards(number) {
+    let n = 0;
     drawFreeCards(number, hand, oppHand);
-    console.log("OPPONENT EXCHANGE CARDS");
-    console.log("Opp hand");
-    console.log(oppHand);
-    console.log("Player hand");
-    console.log(hand);
     for (let i = 0; i < freeCards.length; i ++) {
         let c = freeCards[i];
-        if (c.isJoker || c.value == 'K' || c.value == 'Q' || c.value == 'J') {
-            for (let j = 0; j < oppHand.length; j ++) {
+        if ((c.isJoker) || (c.value == 'K') || (c.value == 'Q') || (c.value == 'J')) {
+            console.log(c);
+            let j = 0;
+            let exchangedCard = false;
+            while (!exchangedCard && j < oppHand.length) {
                 let d = oppHand[j];
-                if (!d.isJoker && d.value != 'K' && d.value != 'Q' && d.value != 'J') {
+                if ((!d.isJoker) && (d.value != 'K') && (d.value != 'Q') && (d.value != 'J')) {
                     // Exchange cards
+                    console.log("Exchange");
                     oppHand[j] = c;
                     freeCards[i] = d;
+                    exchangedCard = true;
+                    n ++;
                 }
+                j ++; 
             }
         }
     }
-    console.log("EXCHANGE");
-    console.log("Opp hand");
-    console.log(oppHand);
-    console.log("Player hand");
-    console.log(hand);
-
+    for (let c of freeCards) {
+        hand.push(c);
+    } freeCards= [];
     cardSpecial = CardSpecial.NONE;
+    return n;
 }
