@@ -283,11 +283,8 @@ function isValid(card) {
 function isValidByIndex(index) {
     if (hand[index] != null)
         return isValid(hand[index]);
-    return true;
+    return false;
 }
-
-// NEED TO CHANGE SET UP SO IT DOESN'T CREATE AN ADDITIONAL DECK
-// EACH TIME.
 
 
 function setUp()

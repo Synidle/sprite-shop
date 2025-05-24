@@ -40,6 +40,10 @@ button.highlighted:hover {
     background-color: green;
 }
 
+#result {
+    font-size: 2em;
+}
+
 /* Severely narrow screen */
 @media (max-width:600px) {
 

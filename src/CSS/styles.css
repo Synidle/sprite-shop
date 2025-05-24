@@ -32,6 +32,9 @@ a {
     color:var(--accent-colour3);
     font-weight: bold;
 }
+a:hover {
+    text-decoration:underline;
+}
 
 h1#page-title  {
     font-family: var(--title-font);

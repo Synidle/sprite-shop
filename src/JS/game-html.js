@@ -144,6 +144,7 @@ function disableInvalidCards() {
             numValid ++;
         }
     }
+    console.log(`Valid cards: ${numValid}.`);
     return numValid;
 }
 
@@ -284,7 +285,9 @@ finishTurnButton.addEventListener("click", () => {
         //setPlacedCard(true);
         if (errorIndex >= 0)
             resolveHandError(errorIndex);
-        disableInvalidCards();
+        if (disableInvalidCards() == 0)
+            finishTurnButton.classList.add("highlighted");
+        else {finishTurnButton.classList.remove("highlighted");}
         showOpponentHand();
     }
 });
