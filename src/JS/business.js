@@ -107,10 +107,14 @@ function tryBuyBusiness(business) {
 function updateBusinessBalance() {
     let balanceInsertText = "";
     let balanceT = localStorage.getItem(KEY_BALANCE);
-    for (let i = 0; i < balanceT.length; i++) {
-        if (i%3 == 1)
-            balanceInsertText += ',';
-        balanceInsertText += balanceT[i];
+    let j = 0; 
+    for (let i = balanceT.length-1; i >= 0; i--) {
+        let t = balanceT[i];
+        if (j == 3) {
+            t += ',';
+            j = 0; 
+        } j ++;
+        balanceInsertText = t + balanceInsertText;
     }
     balanceInsert.innerHTML = balanceInsertText;
 }

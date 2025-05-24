@@ -28,7 +28,7 @@ function updateBalanceHeader() {
     let i = 0;
     let mod = 3;
     let maxMod = 12;
-    while (3 < balance.length+1 && mod <= maxMod) {
+    while (3 < balance.length && mod <= maxMod) {
         balance = balance.substring(0, balance.length-3);
         mod += 3;
         i ++;
