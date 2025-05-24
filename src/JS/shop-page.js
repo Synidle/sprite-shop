@@ -1,5 +1,6 @@
 let itemsDisplay = document.querySelector("#items-display");
 let purchaseMap = new Map(JSON.parse(localStorage.getItem(KEY_PURCHASES)));
+let n = 0; 
 
 console.log(purchaseMap);
 
@@ -25,5 +26,10 @@ for (let p of products) {
             <label class="item-name">${p.name}</label>
             <label class="item-price">£${p.price}</label>
         `;
+        n ++;
     }
+}
+
+if (n == 0) {
+    itemsDisplay.innerHTML = `No more products are currently available to purchase.`
 }
