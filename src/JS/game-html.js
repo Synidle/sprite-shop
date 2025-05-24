@@ -29,7 +29,9 @@ function startGame() {
     setHand();
     //setPlacedCard();
     setPlayedCards();
-    disableInvalidCards();
+    if (disableInvalidCards() == 0)
+        finishTurnButton.classList.add("highlighted");
+    else {finishTurnButton.classList.remove("highlighted");}
     showOpponentHand();
 }
 
@@ -50,10 +52,10 @@ function endGame(gameState) {
             updateBalanceHeader();
             break;
         case GameState.LOSE:
-            resultP.innerHTML = "COMPUTER WIN";
+            resultP.innerHTML = "COMPUTER WIN  :(";
             break;
         case GameState.WIN:
-            resultP.innerHTML = `PLAYER WIN: + £${bet*2}`;
+            resultP.innerHTML = `PLAYER WIN! + £${bet*2}`;
             addBalance(bet * 2);
             updateBalanceHeader();
             break;
@@ -144,7 +146,6 @@ function disableInvalidCards() {
             numValid ++;
         }
     }
-    console.log(`Valid cards: ${numValid}.`);
     return numValid;
 }
 
