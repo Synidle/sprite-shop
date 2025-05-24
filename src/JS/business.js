@@ -2,6 +2,7 @@
 let allBusinesses = [];
 let businessList = document.querySelector("#business-list");
 let balance = parseInt(JSON.parse(localStorage.getItem(KEY_BALANCE)));
+let balanceInsert = document.getElementById("balance-insert");
 
 /**
  * 
@@ -54,6 +55,7 @@ allBusinesses.push(new Business(
 ));
 
 setInterval(updateBusinesses, 1000);
+updateBusinessBalance();
 
 for (let b of allBusinesses) {
     let businessDiv = document.createElement("div");
@@ -102,8 +104,20 @@ function tryBuyBusiness(business) {
     else {return false;}
 }
 
+function updateBusinessBalance() {
+    let balanceInsertText = "";
+    let balanceT = localStorage.getItem(KEY_BALANCE);
+    for (let i = 0; i < balanceT.length; i++) {
+        if (i%3 == 1)
+            balanceInsertText += ',';
+        balanceInsertText += balanceT[i];
+    }
+    balanceInsert.innerHTML = balanceInsertText;
+}
+
 function updateBusinesses() {
     balance = parseInt(JSON.parse(localStorage.getItem(KEY_BALANCE)));
+    updateBusinessBalance();
     for (let b of allBusinesses.values()) {
         let button = document.getElementById(`business-button-${b.id}`);
         if (button != null) {
