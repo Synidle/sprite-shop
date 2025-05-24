@@ -32,6 +32,11 @@ button#finished-button {
     font-size:4em;
 }
 
+button#play-button {
+    font-size:4em;
+    animation: flash-blue .5s infinite alternate;
+}
+
 button.highlighted {
     animation: flash-green .5s infinite alternate;
 }
@@ -52,7 +57,13 @@ button.highlighted:hover {
     }
 }
 
-/* Severely narrow screen */
-@media (max-width:600px) {
-
+@keyframes flash-blue {
+    from {
+        background-color: white;
+        color:black;
+    }
+    to {
+        background-color: var(--accent-colour3);
+        color:white;
+    }
 }
