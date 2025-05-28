@@ -184,7 +184,8 @@ function onPlayCard(card, cardNode) {
             }
         } 
         else {
-            alert("You cannot play that card.");
+            // alert("You cannot play that card.");
+            disableInvalidCards();
         }
     }
 }
