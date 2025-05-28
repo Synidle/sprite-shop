@@ -2,8 +2,6 @@ let itemsDisplay = document.querySelector("#items-display");
 let purchaseMap = getPurchaseMap();
 let n = 0; 
 
-console.log(purchaseMap);
-
 /**
  * Iterate through products and generate a button for each one.
  * For each button, set the onclick event linking to product page

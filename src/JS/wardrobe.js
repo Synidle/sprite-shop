@@ -28,6 +28,7 @@ function displayWardrobe(type) {
     nudeButton.classList.add("clothing-item");
     nudeButton.addEventListener("click", () => {
         removeClothingItem(type);
+        apparel = getApparel();
         updateSpriteApparel(apparel);
     });
     clothingMenu.appendChild(nudeButton);
@@ -45,6 +46,7 @@ function displayWardrobe(type) {
                         removeClothingItem(type);
                     else
                         wearItem(p);
+                    apparel = getApparel();
                     updateSpriteApparel(apparel);
                 });
                 clothingMenu.appendChild(productButton);
