@@ -65,9 +65,9 @@ button:hover:disabled {
 .text-button {
     background: none;
     border:none;
+    color:var(--accent-colour3);
 }
 .text-button:hover {
-    color:var(--accent-colour3);
     text-decoration: underline .15em;
 }
 
