@@ -134,8 +134,7 @@ function updateBusinesses() {
             if (progress != null) {
                 progress.value ++;
                 if (progress.value == progress.max) {
-                    balance = balance+b.profit;
-                    localStorage.setItem(KEY_BALANCE, balance);
+                    addBalance(b.profit);
                     updateBalanceHeader();
                     progress.value = 0;
                 }

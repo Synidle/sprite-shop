@@ -307,11 +307,8 @@ function removeClothingItem(category) {
 function getBusinesses() {
     let userBusinesses;
     let allBusinesses = new Map(JSON.parse(localStorage.getItem(KEY_BUSINESSES)));
-    console.log("All businesses");
-    console.log(allBusinesses);
     // Create entry if none
-    if (allBusinesses.size == 0) {
-        console.log("Create new map");
+    if (allBusinesses.size == 0 || !allBusinesses.has(currentUserName)) {
         userBusinesses = new Map();
         allBusinesses.set(currentUserName, 
             JSON.stringify(Array.from(userBusinesses.entries())));
@@ -320,10 +317,6 @@ function getBusinesses() {
     }
     else {
         userBusinesses = new Map(JSON.parse(allBusinesses.get(currentUserName)));
-        // Returns a new map if object is empty
-        if (userBusinesses.size == 0) {
-            userBusinesses = new Map();
-        }
     }
     return userBusinesses;
 }

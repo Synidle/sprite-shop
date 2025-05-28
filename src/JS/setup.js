@@ -13,8 +13,6 @@ else {
     setCurrentUser(user);
     apparel = getApparel();
     ownedBusinesses = getBusinesses();
-    console.log("Owned businesses");
-    console.log(ownedBusinesses);
 }
 
 // /**
