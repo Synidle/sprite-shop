@@ -222,8 +222,9 @@ function getBalance() {
  * @param {string} key 
  * @returns {boolean} true if a new entry was created.
  */
-function createEntryIfNone(allEntries, userEntries, key) {
-    if (allEntries.size == 0 || !allEntries.has(currentUserName)) {
+function createEntryIfNone(allEntries, userEntries, key, override=false) {
+    if (allEntries.size == 0 || !allEntries.has(currentUserName ||override)) {
+        console.log(`Create entry ${key}`);
         userEntries = new Map();
         allEntries.set(currentUserName,
             JSON.stringify(Array.from(userEntries.entries())));
@@ -231,6 +232,8 @@ function createEntryIfNone(allEntries, userEntries, key) {
             JSON.stringify(Array.from(allEntries.entries())));
         return true;
     }
+    // else if (Object.keys(allEntries.get(currentUserName)).length == 0)
+    //     return createEntryIfNone(allEntries, userEntries, key, true);
     return false;
 }
 
@@ -290,20 +293,18 @@ function getPurchaseMap() {
  * @returns {Map<string, Product>}
  */
 function getApparel() {
+    let userApparel;
     let allApparel = new Map(JSON.parse(localStorage.getItem(KEY_APPAREL)));
-    let userApparel = allApparel.get(currentUserName);
-
-    // Create entry if none
-    if (userApparel == undefined) {
-        userApparel = new Map();
-        allApparel.set(currentUserName, userApparel);
-        localStorage.setItem(KEY_APPAREL,
-            JSON.stringify(Array.from(allApparel.entries())));
+    // Ensure a map for apparel is created
+    // If one does not currently exist.
+    if (!createEntryIfNone(allApparel, userApparel, KEY_APPAREL)) {
+        if (Object.keys(allApparel.get(currentUserName)).length == 0)
+            userApparel = new Map();
+        else 
+            userApparel = new Map(JSON.parse(allApparel.get(currentUserName)));
     }
-    // Returns a new map if object is empty
-    if (Object.keys(userApparel).length == 0)
+    else if (userApparel == undefined)
         userApparel = new Map();
-
     return userApparel;
 }
 
@@ -313,6 +314,7 @@ function getApparel() {
  */
 function wearItem(item) {
     let allApparel = new Map(JSON.parse(localStorage.getItem(KEY_APPAREL)));
+
     apparel.set(item.category, item);
     allApparel.set(currentUserName, apparel);
 

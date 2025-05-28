@@ -13,6 +13,9 @@ else {
     setCurrentUser(user);
     apparel = getApparel();
     ownedBusinesses = getBusinesses();
+
+    console.log("Apparel");
+    console.log(apparel);
 }
 
 // /**
