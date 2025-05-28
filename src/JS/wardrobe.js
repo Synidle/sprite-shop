@@ -1,5 +1,5 @@
 let clothingMenu = document.querySelector("#clothing-menu");
-let purchaseMap = new Map(JSON.parse(localStorage.getItem(KEY_PURCHASES)));
+let purchaseMap = getPurchaseMap();
 
 document.getElementById("head-button").addEventListener("click", () => {
     displayWardrobe(ProductCategory.HEAD);

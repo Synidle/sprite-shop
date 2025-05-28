@@ -217,7 +217,7 @@ function displayFreeCardsWarning() {
 
 document.getElementById("place-bet").addEventListener("click", () => {
     bet = parseInt(betInput.value);
-    if (bet <= parseInt(localStorage.getItem(KEY_BALANCE))) {
+    if (bet <= getBalance()) {
         addBalance(-bet);
         updateBalanceHeader();
         startGame();
@@ -226,7 +226,7 @@ document.getElementById("place-bet").addEventListener("click", () => {
 
 betInput.addEventListener("change", () => {
     bet = parseInt(betInput.value);
-    if (bet > parseInt(localStorage.getItem(KEY_BALANCE)))
+    if (bet > getBalance())
         betWarning.hidden = false;
     else {
         betWarning.hidden = true;

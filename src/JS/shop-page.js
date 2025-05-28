@@ -1,5 +1,5 @@
 let itemsDisplay = document.querySelector("#items-display");
-let purchaseMap = new Map(JSON.parse(localStorage.getItem(KEY_PURCHASES)));
+let purchaseMap = getPurchaseMap();
 let n = 0; 
 
 console.log(purchaseMap);

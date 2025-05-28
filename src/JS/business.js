@@ -1,7 +1,7 @@
 /**@type {Business[]} */
 let allBusinesses = [];
 let businessList = document.querySelector("#business-list");
-let balance = parseInt(JSON.parse(localStorage.getItem(KEY_BALANCE)));
+let balance = getBalance();
 let balanceInsert = document.getElementById("balance-insert");
 
 /**
@@ -95,9 +95,9 @@ for (let b of allBusinesses) {
  * @param {Business} business 
  */
 function tryBuyBusiness(business) {
-    balance = parseInt(JSON.parse(localStorage.getItem(KEY_BALANCE)));
+    balance = getBalance();
     if (business.cost <= balance) {
-        localStorage.setItem(KEY_BALANCE, balance-business.cost);
+        addBalance(-business.cost);
         addBusiness(business);
         return true;
     }
@@ -106,7 +106,7 @@ function tryBuyBusiness(business) {
 
 function updateBusinessBalance() {
     let balanceInsertText = "";
-    let balanceT = localStorage.getItem(KEY_BALANCE);
+    let balanceT = getBalance().toString();
     let j = 0; 
     for (let i = balanceT.length-1; i >= 0; i--) {
         let t = balanceT[i];
@@ -120,7 +120,7 @@ function updateBusinessBalance() {
 }
 
 function updateBusinesses() {
-    balance = parseInt(JSON.parse(localStorage.getItem(KEY_BALANCE)));
+    balance = getBalance();
     updateBusinessBalance();
     for (let b of allBusinesses.values()) {
         let button = document.getElementById(`business-button-${b.id}`);

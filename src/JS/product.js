@@ -39,9 +39,9 @@ function loadProducts() {
 }
 
 function tryBuyProduct(product) {
-    let balance = parseInt(JSON.parse(localStorage.getItem(KEY_BALANCE)));
+    let balance = getBalance();
     if (product.price <= balance) {
-        localStorage.setItem(KEY_BALANCE, balance-product.price);
+        addBalance(-product.price)
         setPurchased(product.name);
         return true;
     } 
