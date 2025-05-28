@@ -21,6 +21,14 @@ let resultP = document.getElementById("result");
 let errorIndex = -1;
 let errorOppIndex = -1; 
 
+const badSfx = new Audio("../Sound/bad.wav");
+const goodSfx = new Audio("../Sound/good.wav");
+const loseSfx = new Audio("../Sound/lose.wav");
+const nextSfx = new Audio("../Sound/next.wav");
+const placeSfx = new Audio("../Sound/place.wav");
+const switchSfx = new Audio("../Sound/switch.wav");
+const winSfx = new Audio("../Sound/win.wav");
+
 function startGame() {
     gameScreen.hidden = false;
     betScreen.hidden = true;
@@ -47,14 +55,17 @@ function endGame(gameState) {
     
     switch(gameState) {
         case GameState.DRAW:
+            loseSfx.play();
             resultP.innerHTML = "DRAW";
             addBalance(bet);
             updateBalanceHeader();
             break;
         case GameState.LOSE:
+            loseSfx.play();
             resultP.innerHTML = "COMPUTER WIN  :(";
             break;
         case GameState.WIN:
+            winSfx.play();
             resultP.innerHTML = `PLAYER WIN! + £${bet*2}`;
             addBalance(bet * 2);
             updateBalanceHeader();
@@ -156,6 +167,7 @@ function disableInvalidCards() {
  */
 function onPlayCard(card, cardNode) {
     if (cardSpecial == CardSpecial.KING) {
+        switchSfx.play();
         freeCards.push(card);
         hand.splice(hand.indexOf(card), 1);
         setHand();
@@ -168,6 +180,7 @@ function onPlayCard(card, cardNode) {
     }
     else {
         if (playCard(card, hand)) {
+            placeSfx.play();
             cardNode.hidden = true;
             setPlayedCards();
             if (disableInvalidCards() == 0)
@@ -176,6 +189,7 @@ function onPlayCard(card, cardNode) {
                 finishTurnButton.classList.remove("highlighted");
     
             if (card.value == "K") {
+                goodSfx.play();
                 notification.innerHTML = "Exchange cards.";
                 drawFreeCards(sequence.length, oppHand, hand);
                 setFreeCards();
@@ -250,12 +264,14 @@ finishTurnButton.addEventListener("click", () => {
             continueToFinish = true;
         }
         else  {
+            badSfx.play();
             displayFreeCardsWarning();
             continueToFinish = false;
         }
     }
     if (continueToFinish) {
         console.log("//");
+        nextSfx.play();
         completeRound(endGame);
         setHand();
         if (!playerTurn) {
@@ -265,11 +281,13 @@ finishTurnButton.addEventListener("click", () => {
                 setPlayedCards();
                 completeRound(endGame);
                 if (!playerTurn) {
+                    badSfx.play();
                     console.log("Skip player turn");
                     notification.innerHTML = "Skipped player's turn.";
                 }
                 else if (oppLastPlayedCard != undefined) {
                     if (oppLastPlayedCard.value == 'K') {
+                        badSfx.play();
                         let n = opponentExchangeCards(oppSequence.length);
                         notification.innerHTML = `Opponent exchanged ${n} cards with the player.`;
                         setHand();
@@ -281,6 +299,7 @@ finishTurnButton.addEventListener("click", () => {
         }
         else  {
             console.log("Skip opponent turn");
+            goodSfx.play();
             notification.innerHTML = "Skipped opponent's turn."
             setPlayedCards();
         }
