@@ -217,18 +217,39 @@ function getBalance() {
 
 /**
  * 
+ * @param {Map<string, Map<any, any>>} allEntries 
+ * @param {Map<any, any>} userEntries 
+ * @param {string} key 
+ * @returns {boolean} true if a new entry was created.
+ */
+function createEntryIfNone(allEntries, userEntries, key) {
+    if (allEntries.size == 0 || !allEntries.has(currentUserName)) {
+        userEntries = new Map();
+        allEntries.set(currentUserName,
+            JSON.stringify(Array.from(userEntries.entries())));
+        localStorage.setItem(key,
+            JSON.stringify(Array.from(allEntries.entries())));
+        return true;
+    }
+    return false;
+}
+
+/**
+ * 
  * @param {string} productName 
  */
 function setPurchased(productName) {
+    let userPurchases;
     let allPurchases = new Map(JSON.parse(localStorage.getItem(KEY_PURCHASES)));
-    let purchaseMap = allPurchases.get(currentUserName);
-    if (purchaseMap == undefined)
-        purchaseMap = new Map();
-    purchaseMap.set(productName, true);
-    allPurchases.set(currentUserName, purchaseMap);
+
+    if (!createEntryIfNone(allPurchases, userPurchases, KEY_PURCHASES))
+        userPurchases = new Map(JSON.parse(allPurchases.get(currentUserName)));
+
+    userPurchases.set(productName, true);
+    allPurchases.set(currentUserName, 
+        JSON.stringify(Array.from(userPurchases.entries())));
     localStorage.setItem(KEY_PURCHASES,
-        JSON.stringify(Array.from(purchaseMap.entries()))
-    );
+        JSON.stringify(Array.from(allPurchases.entries())));
 }
 
 /**
@@ -237,11 +258,15 @@ function setPurchased(productName) {
  * @returns {boolean}
  */
 function getPurchased(productName) {
+    let userPurchases;
     let allPurchases = new Map(JSON.parse(localStorage.getItem(KEY_PURCHASES)));
-    let purchaseMap = allPurchases.get(currentUserName);
-    if (purchaseMap == undefined)
+    // Create entry if none
+    if (createEntryIfNone(allPurchases, userPurchases, KEY_PURCHASES))
         return false;
-    if (purchaseMap.get(productName) != undefined)
+    else
+        userPurchases = new Map(JSON.parse(allPurchases.get(currentUserName)));
+
+    if (userPurchases.get(productName) != undefined)
         return true;
     else {return false;}
 }
@@ -251,9 +276,13 @@ function getPurchased(productName) {
  * @returns {Map<string, boolean>}
  */
 function getPurchaseMap() {
+    let userPurchases;
     let allPurchases = new Map(JSON.parse(localStorage.getItem(KEY_PURCHASES)));
-    let purchaseMap = allPurchases.get(currentUserName);
-    return purchaseMap == undefined ? new Map() : purchaseMap;
+    // Create entry if none
+    if (!createEntryIfNone(allPurchases, userPurchases, KEY_PURCHASES))
+        userPurchases = new Map(JSON.parse(allPurchases.get(currentUserName)));
+
+    return userPurchases;
 }
 
 /**
