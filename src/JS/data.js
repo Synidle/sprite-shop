@@ -313,11 +313,15 @@ function getApparel() {
  * @param {Product} item
  */
 function wearItem(item) {
+    let userApparel;
     let allApparel = new Map(JSON.parse(localStorage.getItem(KEY_APPAREL)));
 
-    apparel.set(item.category, item);
-    allApparel.set(currentUserName, apparel);
+    if (!createEntryIfNone(allApparel, userApparel, KEY_APPAREL))
+        userApparel = new Map(JSON.parse(allApparel.get(currentUserName)));
 
+    userApparel.set(item.category, item);
+    allApparel.set(currentUserName,
+        JSON.stringify(Array.from(userApparel.entries())));
     localStorage.setItem(KEY_APPAREL, 
         JSON.stringify(Array.from(allApparel.entries())));
 }
