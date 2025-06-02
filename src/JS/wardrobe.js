@@ -1,3 +1,5 @@
+let clothingHeader = document.getElementById("clothing-header");
+let clothingWarning = document.getElementById("clothing-warning");
 let clothingMenu = document.querySelector("#clothing-menu");
 let purchaseMap = getPurchaseMap();
 
@@ -23,6 +25,7 @@ document.getElementById("accessory-button").addEventListener("click", () => {
  */
 function displayWardrobe(type) {
     clothingMenu.innerHTML = "";
+    clothingWarning.hidden = true;
 
     let nudeButton = document.createElement("button");
     nudeButton.classList.add("clothing-item");
@@ -36,6 +39,7 @@ function displayWardrobe(type) {
         <i class="fa-solid fa-ban"</i>
     `;
 
+    let n = 0;
     for (let p of products) {
         if (purchaseMap.has(p.name)) {
             if (p.category == type) {
@@ -53,8 +57,16 @@ function displayWardrobe(type) {
                 productButton.innerHTML += `
                     <img src=${p.imagePath} alt=${p.description}>
                 `;
+                n ++;
             }
         }
+    }
+    clothingHeader.hidden = false;
+    clothingHeader.innerHTML = `Wardrobe: ${type}`;
+    if (n == 0) {
+        clothingWarning.hidden = false;
+        clothingWarning.innerHTML = `No ${type} clothing purchased yet.`;
+        clothingMenu.innerHTML = "";
     }
 }
 

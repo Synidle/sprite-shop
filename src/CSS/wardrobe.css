@@ -6,7 +6,7 @@
     /* height:50vh; */
     display:grid;
     grid-template-columns: .5fr 1fr .5fr .5fr;
-    padding-bottom:4em;
+    padding-bottom:1em;
 }
 
 canvas {
