@@ -233,16 +233,35 @@ function displayFreeCardsWarning() {
 document.getElementById("place-bet").addEventListener("click", () => {
     bet = parseInt(betInput.value);
     if (bet <= getBalance() && bet >= 0) {
+        betWarning.hidden = true;
         addBalance(-bet);
         updateBalanceHeader();
         startGame();
     }
+    else if (bet > getBalance()) {
+        betWarning.innerHTML = "Insufficient balance to make bet.";
+        betWarning.hidden = false;
+    }
+    else if (bet < 0) {
+        betWarning.innerHTML = "Cannot bet a negative amount of money.";
+        betWarning.hidden = false;
+    }
+    else {
+        betWarning.innerHTML = "Please make a valid bet.";
+        betWarning.hidden = false;
+    }
 });
 
-betInput.addEventListener("change", () => {
+betInput.addEventListener("input", () => {
     bet = parseInt(betInput.value);
-    if (bet > getBalance())
+    if (bet > getBalance()) {
+        betWarning.innerHTML = "Insufficient balance to make bet.";
         betWarning.hidden = false;
+    }
+    else if (bet < 0) {
+        betWarning.innerHTML = "Cannot bet a negative amount of money."
+        betWarning.hidden = false;
+    }
     else {
         betWarning.hidden = true;
     }
