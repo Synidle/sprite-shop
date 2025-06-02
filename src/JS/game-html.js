@@ -160,6 +160,8 @@ function disableInvalidCards() {
                 numValid ++;
             }
         } catch {
+            // sometimes hand is incomplete, causing errors
+            // this handles that
             console.log("CAUGHT ERROR");
             setHand();
         }
@@ -173,6 +175,7 @@ function disableInvalidCards() {
  * @param {Node} cardNode
  */
 function onPlayCard(card, cardNode) {
+    // Play King
     if (cardSpecial == CardSpecial.KING) {
         switchSfx.play();
         freeCards.push(card);
@@ -186,6 +189,7 @@ function onPlayCard(card, cardNode) {
         else {freeCardsWarning.hidden = true;}
     }
     else {
+        // Successfully play card
         if (playCard(card, hand)) {
             placeSfx.play();
             cardNode.hidden = true;
@@ -207,7 +211,11 @@ function onPlayCard(card, cardNode) {
                 showOpponentHand();
             }
         } 
+        // Card is invalid
         else {
+            // This code shouldn't run under normal
+            // circumstances, so it re-disables
+            // invalid cards.
             // alert("You cannot play that card.");
             disableInvalidCards();
         }
@@ -285,6 +293,7 @@ document.getElementById("play-button").addEventListener("click", () => {
 finishTurnButton.addEventListener("click", () => {
     let continueToFinish = true;
     notification.innerHTML = "";
+    // Resolve card exchange if in King special.
     if (cardSpecial == CardSpecial.KING) {
         if (resolveCardExchange()) {
             freeCardsWarning.hidden = true;
@@ -304,17 +313,20 @@ finishTurnButton.addEventListener("click", () => {
         completeRound(endGame);
         setHand();
         if (!playerTurn) {
+            // Complete opponent turn
             while (!playerTurn) {
                 let oppLastPlayedCard = doOpponentTurn();
                 showOpponentHand();
                 setPlayedCards();
                 completeRound(endGame);
+                // If Jack played, skip player's turn (repeat)
                 if (!playerTurn) {
                     badSfx.play();
                     console.log("Skip player turn");
                     notification.innerHTML = "Skipped player's turn.";
                 }
                 else if (oppLastPlayedCard != undefined) {
+                    // Exchange cards
                     if (oppLastPlayedCard.value == 'K') {
                         badSfx.play();
                         let n = opponentExchangeCards(oppSequence.length);
@@ -326,6 +338,7 @@ finishTurnButton.addEventListener("click", () => {
                     resolveOppError(errorIndex);
             }
         }
+        // If Jack played, skip opponent turn.
         else  {
             console.log("Skip opponent turn");
             goodSfx.play();
@@ -333,8 +346,10 @@ finishTurnButton.addEventListener("click", () => {
             setPlayedCards();
         }
         //setPlacedCard(true);
+        // Resolve error of hand not completing.
         if (errorIndex >= 0)
             resolveHandError(errorIndex);
+        // Highlight finish button if no cards to play.
         if (disableInvalidCards() == 0) {
             promptP.innerHTML = "Finish turn.";
             finishTurnButton.classList.add("highlighted");
