@@ -152,11 +152,16 @@ function showOpponentHand() {
 function disableInvalidCards() {
     let numValid = 0;
     for (let i = 0; i < 7; i ++) {
-        if (!isValidByIndex(i)) {
-            handButtons[i].disabled = true;
-        } else {
-            handButtons[i].disabled = false;
-            numValid ++;
+        try {
+            if (!isValidByIndex(i)) {
+                handButtons[i].disabled = true;
+            } else {
+                handButtons[i].disabled = false;
+                numValid ++;
+            }
+        } catch {
+            console.log("CAUGHT ERROR");
+            setHand();
         }
     }
     return numValid;
