@@ -23,7 +23,7 @@ document.querySelector("#header").innerHTML = `
 updateBalanceHeader();
 
 function updateBalanceHeader() {
-    let balance = getBalance();
+    let balance = getBalance().toString();
     let append;
     let i = 0;
     let mod = 3;
