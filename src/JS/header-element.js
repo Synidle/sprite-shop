@@ -13,10 +13,10 @@ document.querySelector("#header").innerHTML = `
         <li><button id="signout-button"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out</button></li>
     </menu>
     <nav id="main-nav">
-        <button id="home-button"><i class="fa-solid fa-house-chimney"></i><span class="nav-button-text"> Home</span></button>
-        <button id="business-button"><i class="fa-solid fa-money-bill-trend-up"></i><span class="nav-button-text"> Business</span></button>
-        <button id="casino-button"><i class="fa-solid fa-heart"></i><span class="nav-button-text"> Casino</span></button>
-        <button id="shop-button"><i class="fa-solid fa-shop"></i><span class="nav-button-text"> Shop</span></button>
+        <button id="home-button" class="navbar"><i class="fa-solid fa-house-chimney"></i><span class="nav-button-text"> Home</span></button>
+        <button id="business-button" class="navbar"><i class="fa-solid fa-money-bill-trend-up"></i><span class="nav-button-text"> Business</span></button>
+        <button id="casino-button" class="navbar"><i class="fa-solid fa-heart"></i><span class="nav-button-text"> Casino</span></button>
+        <button id="shop-button" class="navbar"><i class="fa-solid fa-shop"></i><span class="nav-button-text"> Shop</span></button>
     </nav>
 `;
 

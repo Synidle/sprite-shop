@@ -7,8 +7,10 @@
     --title-font:arial;
     --main-font:trebuchet ms;
 
+    --accent-colour2: #fff266;
     --accent-colour3: #2572ff;
     --accent-colour4: #000050;
+    --accent-colour5: #f8cd32;
 }
 
 body {
@@ -199,6 +201,31 @@ button.minor {
 }
 button.minor:hover {
     background-color: lightgrey;
+}
+
+button.plain {
+    background-color: white;
+    border:solid black 1px;
+    border-radius: 0px;
+    transition: background-color .3s ease;
+}
+button.plain:hover {
+    background-color:lightgrey;
+}
+button.plain:disabled {
+    background-color:grey;
+    color:lightgrey;
+}
+
+button.navbar {
+    background-color: var(--accent-colour2);
+    border:solid black 1px;
+    border-radius:0px;
+    transition:background-color .3s ease;
+}
+button.navbar:hover {
+    background-color:var(--accent-colour5);
+    font-weight: bold;
 }
 
 /* Wide screen */
