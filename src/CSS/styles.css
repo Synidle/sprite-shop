@@ -172,6 +172,35 @@ input[type="submit"] {
     color:red;
 }
 
+button.major, button.minor {
+    border-radius: 16px;
+    font-size:1.2em;
+    padding:.4em;
+    margin:.4em;
+    transition: background-color .3s ease;
+}
+
+button.major {
+    border:none;
+    color:white;
+    background-color:var(--accent-colour3);
+}
+button.major:hover {
+    background-color:var(--accent-colour4);
+}
+button.major:disabled {
+    background-color:grey;
+    color:lightgrey;
+}
+
+button.minor {
+    border:solid black 1px;
+    background-color:white;
+}
+button.minor:hover {
+    background-color: lightgrey;
+}
+
 /* Wide screen */
 
 @media (min-width:901px) {

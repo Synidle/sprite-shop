@@ -14,6 +14,9 @@ buyButton.addEventListener("click", () => {
     else
         document.getElementById("insufficient-balance").hidden = false;
 });
+document.getElementById("return").addEventListener("click", () => {
+    open("../Pages/shop.html", "_self");
+});
 
 if (getPurchased(product.name)) {
     buyButton.innerHTML = "Purchased";
