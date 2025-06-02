@@ -173,6 +173,9 @@ input[type="submit"] {
 .warning {
     color:red;
 }
+.alert {
+    color:var(--accent-colour4);
+}
 
 button.major, button.minor {
     border-radius: 16px;

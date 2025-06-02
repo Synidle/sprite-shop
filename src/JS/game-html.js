@@ -1,6 +1,7 @@
 let bet = 0;
 /**Used to display updates on game. */
 let notification = document.getElementById("notification");
+let promptP = document.getElementById("prompt");
 let gameScreen = document.getElementById("game");
 let betScreen = document.getElementById("bet");
 let betInput = document.getElementById("bet-input");
@@ -77,6 +78,7 @@ function endGame(gameState) {
 }
 
 function setHand() {
+    promptP.innerHTML = "Play cards.";
     playerHandSec.innerHTML = "";
     handButtons = [];
     errorIndex = -1;
@@ -183,14 +185,17 @@ function onPlayCard(card, cardNode) {
             placeSfx.play();
             cardNode.hidden = true;
             setPlayedCards();
-            if (disableInvalidCards() == 0)
+            if (disableInvalidCards() == 0) {
+                promptP.innerHTML = "Finish turn.";
                 finishTurnButton.classList.add("highlighted");
+            }
             else 
                 finishTurnButton.classList.remove("highlighted");
     
             if (card.value == "K") {
                 goodSfx.play();
                 notification.innerHTML = "Exchange cards.";
+                promptP.innerHTML = "";
                 drawFreeCards(sequence.length, oppHand, hand);
                 setFreeCards();
                 setHand();
@@ -325,8 +330,10 @@ finishTurnButton.addEventListener("click", () => {
         //setPlacedCard(true);
         if (errorIndex >= 0)
             resolveHandError(errorIndex);
-        if (disableInvalidCards() == 0)
+        if (disableInvalidCards() == 0) {
+            promptP.innerHTML = "Finish turn.";
             finishTurnButton.classList.add("highlighted");
+        }
         else {finishTurnButton.classList.remove("highlighted");}
         showOpponentHand();
     }
