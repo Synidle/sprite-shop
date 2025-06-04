@@ -8,9 +8,9 @@ document.querySelector("#header").innerHTML = `
             <button id="user-pfp-button" aria-label="profile menu"><i id="user-pfp-icon" class="fa-solid fa-circle-user"></i></button>
     </div>
     <menu id="user-menu">
-        <li><button id="profile-button"><i class="fa-solid fa-user"></i> Profile</button></li>
-        <li><button id="settings-button" disabled><i class="fa-solid fa-gear"></i> Settings</button></li>
-        <li><button id="signout-button"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out</button></li>
+        <li><button id="profile-button" class="plain"><i class="fa-solid fa-user"></i> Profile</button></li>
+        <li><button id="settings-button" class="plain" disabled><i class="fa-solid fa-gear"></i> Settings</button></li>
+        <li><button id="signout-button" class="plain"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out</button></li>
     </menu>
     <nav id="main-nav">
         <button id="home-button" class="navbar"><i class="fa-solid fa-house-chimney"></i><span class="nav-button-text"> Home</span></button>
