@@ -206,6 +206,10 @@ function addBalance(amount) {
     localStorage.setItem(KEY_BALANCE, JSON.stringify(Array.from(allBalances.entries())));
 }
 
+/**
+ * 
+ * @returns {number} balance for current user
+ */
 function getBalance() {
     let allBalances = new Map(JSON.parse(localStorage.getItem(KEY_BALANCE)));
     if (!allBalances.has(currentUserName)) {
