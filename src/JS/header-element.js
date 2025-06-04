@@ -5,7 +5,7 @@ document.querySelector("#header").innerHTML = `
         <p id="coin-img" class="fa-solid fa-coins"></p>
         <p id="balance-num">£<span id=balance-num-val></span></p>
         <!-- <button id="user-pfp"><img src="Data/UI/user-pfp.png" alt="user profile picture"></button> -->
-            <button id="user-pfp-button"><i id="user-pfp-icon" class="fa-solid fa-circle-user"></i></button>
+            <button id="user-pfp-button" aria-label="profile menu"><i id="user-pfp-icon" class="fa-solid fa-circle-user"></i></button>
     </div>
     <menu id="user-menu">
         <li><button id="profile-button"><i class="fa-solid fa-user"></i> Profile</button></li>
